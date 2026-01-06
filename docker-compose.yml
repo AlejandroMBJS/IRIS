@@ -16,7 +16,7 @@ services:
       - DATABASE_URL=/data/iris_payroll.db
       - UPLOAD_PATH=/data/uploads
       - PDF_OUTPUT_PATH=/data/pdfs
-      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost,http://localhost:80}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
     volumes:
       - iris-data:/data
     restart: unless-stopped
@@ -75,15 +75,15 @@ services:
 
   # Nginx Reverse Proxy
   nginx:
-    image: nginx:alpine
+    image: docker.io/library/nginx:alpine
     container_name: iris-payroll-nginx
     labels:
       - "com.iris.service=Nginx Proxy"
       - "com.iris.description=Proxy reverso y balanceador"
-      - "com.iris.port=80,8081"
+      - "com.iris.port=8080,8081"
     ports:
-      - "80:80"
-      - "8081:8081"
+      - "9090:80"
+      - "9091:8081"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro,z
     depends_on:
@@ -94,20 +94,20 @@ services:
     networks:
       - iris-network
 
-  # Docker Stats Exporter
-  docker-exporter:
-    build: ./monitoring/docker-stats-exporter
-    container_name: iris-docker-exporter
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
-    networks:
-      - iris-network
+  # Docker Stats Exporter (disabled for rootless mode - requires Docker socket access)
+  # docker-exporter:
+  #   build: ./monitoring/docker-stats-exporter
+  #   container_name: iris-docker-exporter
+  #   privileged: true
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   restart: unless-stopped
+  #   networks:
+  #     - iris-network
 
   # Prometheus - Recolector de metricas
   prometheus:
-    image: prom/prometheus:latest
+    image: docker.io/prom/prometheus:latest
     container_name: iris-prometheus
     volumes:
       - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro,z
@@ -122,10 +122,10 @@ services:
 
   # Grafana - Dashboard visual
   grafana:
-    image: grafana/grafana:latest
+    image: docker.io/grafana/grafana:latest
     container_name: iris-grafana
     ports:
-      - "8082:3000"
+      - "9092:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=iris2026
@@ -142,7 +142,7 @@ services:
 
   # Loki - Agregador de logs
   loki:
-    image: grafana/loki:2.9.0
+    image: docker.io/grafana/loki:2.9.0
     container_name: iris-loki
     volumes:
       - ./monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro,z
@@ -152,22 +152,22 @@ services:
     networks:
       - iris-network
 
-  # Promtail - Recolector de logs
-  promtail:
-    image: grafana/promtail:2.9.0
-    container_name: iris-promtail
-    privileged: true
-    user: root
-    volumes:
-      - ./monitoring/loki/promtail-config.yml:/etc/promtail/config.yml:ro,z
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    command: -config.file=/etc/promtail/config.yml
-    depends_on:
-      - loki
-    restart: unless-stopped
-    networks:
-      - iris-network
+  # Promtail - Recolector de logs (disabled for rootless mode - requires Docker socket access)
+  # promtail:
+  #   image: grafana/promtail:2.9.0
+  #   container_name: iris-promtail
+  #   privileged: true
+  #   user: root
+  #   volumes:
+  #     - ./monitoring/loki/promtail-config.yml:/etc/promtail/config.yml:ro,z
+  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #   command: -config.file=/etc/promtail/config.yml
+  #   depends_on:
+  #     - loki
+  #   restart: unless-stopped
+  #   networks:
+  #     - iris-network
 
 volumes:
   iris-data:
