@@ -96,16 +96,23 @@ $COMPOSE_CMD up -d
 echo ""
 echo -e "${YELLOW}Waiting for services to be healthy...${NC}"
 
+# Determine container command
+if [ "$USING_PODMAN" = true ]; then
+    CONTAINER_CMD="podman"
+else
+    CONTAINER_CMD="docker"
+fi
+
 # Wait for backend
 echo -e "  Waiting for Backend..."
 for i in {1..60}; do
-    if docker exec iris-payroll-backend wget --no-verbose --tries=1 -O /dev/null http://localhost:8080/health 2>/dev/null; then
+    if $CONTAINER_CMD exec iris-payroll-backend wget --no-verbose --tries=1 -O /dev/null http://localhost:8080/health 2>/dev/null; then
         echo -e "${GREEN}  Backend is ready!${NC}"
         break
     fi
     if [ $i -eq 60 ]; then
         echo -e "${RED}  Backend failed to start within timeout${NC}"
-        echo -e "${YELLOW}  Check logs with: docker logs iris-payroll-backend${NC}"
+        echo -e "${YELLOW}  Check logs with: $CONTAINER_CMD logs iris-payroll-backend${NC}"
     fi
     sleep 2
 done
@@ -158,10 +165,10 @@ echo -e "  API:    ${CYAN}http://localhost:80/api/v1/health${NC}"
 echo ""
 echo -e "View logs:"
 echo -e "  All:      ${BLUE}$COMPOSE_CMD logs -f${NC}"
-echo -e "  Backend:  ${BLUE}docker logs -f iris-payroll-backend${NC}"
-echo -e "  Frontend: ${BLUE}docker logs -f iris-payroll-frontend${NC}"
-echo -e "  Portal:   ${BLUE}docker logs -f iris-employee-portal${NC}"
-echo -e "  Nginx:    ${BLUE}docker logs -f iris-payroll-nginx${NC}"
+echo -e "  Backend:  ${BLUE}$CONTAINER_CMD logs -f iris-payroll-backend${NC}"
+echo -e "  Frontend: ${BLUE}$CONTAINER_CMD logs -f iris-payroll-frontend${NC}"
+echo -e "  Portal:   ${BLUE}$CONTAINER_CMD logs -f iris-employee-portal${NC}"
+echo -e "  Nginx:    ${BLUE}$CONTAINER_CMD logs -f iris-payroll-nginx${NC}"
 echo ""
 echo -e "To stop the services, run:"
 echo -e "  ${BLUE}./scripts/docker-stop.sh${NC}"

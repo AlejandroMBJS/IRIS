@@ -3,13 +3,21 @@
 # Seed script for Improaerotek default users
 # Creates admin and role-specific users
 
-API_URL="http://localhost:80/api/v1"
+# Try nginx first (port 80), fallback to direct backend (port 8080)
+if curl -s http://localhost:80/api/v1/health >/dev/null 2>&1; then
+    API_URL="http://localhost:80/api/v1"
+elif curl -s http://localhost/api/v1/health >/dev/null 2>&1; then
+    API_URL="http://localhost/api/v1"
+else
+    API_URL="http://localhost:8080/api/v1"
+fi
 PASSWORD="Password123@"
 DOMAIN="@improaerotek.com"
 
 echo "=========================================="
 echo "IRIS - Improaerotek Users Seed"
 echo "=========================================="
+echo "Using API: $API_URL"
 
 # Function to extract token from JSON response (no jq needed)
 extract_token() {
