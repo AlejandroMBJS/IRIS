@@ -21,8 +21,20 @@ echo ""
 
 cd "$PROJECT_ROOT"
 
-# Determine docker compose command
-if docker compose version >/dev/null 2>&1; then
+# Detect if using podman
+USING_PODMAN=false
+if command -v podman >/dev/null 2>&1 && podman info >/dev/null 2>&1; then
+    USING_PODMAN=true
+fi
+
+# Determine compose command
+if [ "$USING_PODMAN" = true ]; then
+    if command -v podman-compose >/dev/null 2>&1; then
+        COMPOSE_CMD="podman-compose"
+    else
+        COMPOSE_CMD="podman compose"
+    fi
+elif docker compose version >/dev/null 2>&1; then
     COMPOSE_CMD="docker compose"
 else
     COMPOSE_CMD="docker-compose"

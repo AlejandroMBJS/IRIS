@@ -24,24 +24,53 @@ echo ""
 
 cd "$PROJECT_ROOT"
 
-# Check if Docker is running
-if ! docker info >/dev/null 2>&1; then
-    echo -e "${RED}Docker is not running. Please start Docker first.${NC}"
-    exit 1
+# Detect if using podman
+USING_PODMAN=false
+if command -v podman >/dev/null 2>&1 && podman info >/dev/null 2>&1; then
+    USING_PODMAN=true
+    echo -e "${CYAN}Detected Podman environment${NC}"
 fi
 
-# Check if docker-compose is available
-if ! command -v docker-compose >/dev/null 2>&1 && ! docker compose version >/dev/null 2>&1; then
-    echo -e "${RED}docker-compose is not installed. Please install it first.${NC}"
-    exit 1
+# Check if Docker/Podman is running
+if [ "$USING_PODMAN" = true ]; then
+    if ! podman info >/dev/null 2>&1; then
+        echo -e "${RED}Podman is not running properly.${NC}"
+        exit 1
+    fi
+else
+    if ! docker info >/dev/null 2>&1; then
+        echo -e "${RED}Docker is not running. Please start Docker first.${NC}"
+        exit 1
+    fi
 fi
 
-# Determine docker compose command
-if docker compose version >/dev/null 2>&1; then
+# Enable port 80 for rootless podman if needed
+if [ "$USING_PODMAN" = true ]; then
+    CURRENT_PORT_START=$(cat /proc/sys/net/ipv4/ip_unprivileged_port_start 2>/dev/null || echo "1024")
+    if [ "$CURRENT_PORT_START" -gt 80 ]; then
+        echo -e "${YELLOW}Enabling port 80 for rootless podman (requires sudo)...${NC}"
+        sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80 >/dev/null 2>&1 || {
+            echo -e "${RED}Failed to enable port 80. Run manually: sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80${NC}"
+            exit 1
+        }
+        echo -e "${GREEN}Port 80 enabled${NC}"
+    fi
+fi
+
+# Determine compose command
+if [ "$USING_PODMAN" = true ]; then
+    if command -v podman-compose >/dev/null 2>&1; then
+        COMPOSE_CMD="podman-compose"
+    else
+        COMPOSE_CMD="podman compose"
+    fi
+elif docker compose version >/dev/null 2>&1; then
     COMPOSE_CMD="docker compose"
 else
     COMPOSE_CMD="docker-compose"
 fi
+
+echo -e "${CYAN}Using compose command: $COMPOSE_CMD${NC}"
 
 # Stop existing containers first
 echo -e "${YELLOW}Stopping existing containers...${NC}"
@@ -53,7 +82,11 @@ echo ""
 
 # Build all images
 echo -e "${CYAN}Building Docker images...${NC}"
-$COMPOSE_CMD build --no-cache
+if [ "$USING_PODMAN" = true ]; then
+    $COMPOSE_CMD build
+else
+    $COMPOSE_CMD build --no-cache
+fi
 
 echo ""
 echo -e "${CYAN}Starting containers...${NC}"

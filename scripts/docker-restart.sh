@@ -8,6 +8,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Get the directory where the script is located
@@ -21,8 +22,32 @@ echo ""
 
 cd "$PROJECT_ROOT"
 
-# Determine docker compose command
-if docker compose version >/dev/null 2>&1; then
+# Detect if using podman
+USING_PODMAN=false
+if command -v podman >/dev/null 2>&1 && podman info >/dev/null 2>&1; then
+    USING_PODMAN=true
+fi
+
+# Enable port 80 for rootless podman if needed
+if [ "$USING_PODMAN" = true ]; then
+    CURRENT_PORT_START=$(cat /proc/sys/net/ipv4/ip_unprivileged_port_start 2>/dev/null || echo "1024")
+    if [ "$CURRENT_PORT_START" -gt 80 ]; then
+        echo -e "${YELLOW}Enabling port 80 for rootless podman (requires sudo)...${NC}"
+        sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80 >/dev/null 2>&1 || {
+            echo -e "${RED}Failed to enable port 80. Run manually: sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80${NC}"
+            exit 1
+        }
+    fi
+fi
+
+# Determine compose command
+if [ "$USING_PODMAN" = true ]; then
+    if command -v podman-compose >/dev/null 2>&1; then
+        COMPOSE_CMD="podman-compose"
+    else
+        COMPOSE_CMD="podman compose"
+    fi
+elif docker compose version >/dev/null 2>&1; then
     COMPOSE_CMD="docker compose"
 else
     COMPOSE_CMD="docker-compose"
@@ -37,7 +62,11 @@ fi
 if [ "$REBUILD" = true ]; then
     echo -e "${YELLOW}Rebuilding and restarting all services...${NC}"
     $COMPOSE_CMD down
-    $COMPOSE_CMD build --no-cache
+    if [ "$USING_PODMAN" = true ]; then
+        $COMPOSE_CMD build
+    else
+        $COMPOSE_CMD build --no-cache
+    fi
     $COMPOSE_CMD up -d
 else
     echo -e "${YELLOW}Restarting all services...${NC}"

@@ -95,6 +95,14 @@ func (m *CSRFMiddleware) Protect() gin.HandlerFunc {
 			return
 		}
 
+		// Skip validation for Bearer token authentication
+		// Bearer tokens are not vulnerable to CSRF (not sent automatically like cookies)
+		authHeader := c.GetHeader("Authorization")
+		if strings.HasPrefix(authHeader, "Bearer ") {
+			c.Next()
+			return
+		}
+
 		// Validate CSRF token for state-changing requests
 		headerToken := c.GetHeader(CSRFTokenHeaderName)
 		cookieToken, err := c.Cookie(CSRFTokenCookieName)

@@ -1,0 +1,8 @@
+CONTAINER ID  IMAGE                                  COMMAND               CREATED        STATUS                      PORTS                                       NAMES
+e974b0e07c1a  localhost/iris_backend:latest          ./iris-payroll-ba...  5 minutes ago  Up 5 minutes ago (healthy)  0.0.0.0:8080->8080/tcp                      iris-payroll-backend
+d00e6b8f4e4e  docker.io/prom/prometheus:latest       --config.file=/et...  5 minutes ago  Up 5 minutes ago                                                        iris-prometheus
+91b1e7f8e613  docker.io/grafana/loki:2.9.0           -config.file=/etc...  5 minutes ago  Up 5 minutes ago                                                        iris-loki
+99d3cd3871d4  localhost/iris_frontend:latest         node server.js        5 minutes ago  Up 5 minutes ago                                                        iris-payroll-frontend
+5fd4412f5108  localhost/iris_employee-portal:latest  node server.js        5 minutes ago  Up 5 minutes ago                                                        iris-employee-portal
+3ae986c994cb  docker.io/grafana/grafana:latest                             5 minutes ago  Up 5 minutes ago            0.0.0.0:8082->3000/tcp                      iris-grafana
+cbaa01c76a79  docker.io/library/nginx:alpine         nginx -g daemon o...  5 minutes ago  Up 5 minutes ago            0.0.0.0:80->80/tcp, 0.0.0.0:8081->8081/tcp  iris-payroll-nginx
