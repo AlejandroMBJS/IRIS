@@ -1,0 +1,40 @@
+{
+  "editable": true,
+  "panels": [
+    {
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "fieldConfig": {"defaults": {"unit": "percent"}},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "targets": [{"expr": "docker_container_cpu_percent", "legendFormat": "{{name}}", "refId": "A"}],
+      "title": "CPU % - Todos los contenedores",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "fieldConfig": {"defaults": {"unit": "bytes"}},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8},
+      "id": 2,
+      "targets": [{"expr": "docker_container_memory_bytes", "legendFormat": "{{name}}", "refId": "A"}],
+      "title": "Memoria - Todos los contenedores",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "fieldConfig": {"defaults": {"unit": "bytes"}},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16},
+      "id": 3,
+      "targets": [
+        {"expr": "docker_container_network_rx_bytes", "legendFormat": "{{name}} RX", "refId": "A"},
+        {"expr": "docker_container_network_tx_bytes", "legendFormat": "{{name}} TX", "refId": "B"}
+      ],
+      "title": "Red - Todos los contenedores",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "time": {"from": "now-30m", "to": "now"},
+  "title": "IRIS - Vista Simple",
+  "uid": "iris-simple"
+}

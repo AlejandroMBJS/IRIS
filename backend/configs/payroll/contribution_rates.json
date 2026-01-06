@@ -1,0 +1,56 @@
+{
+  "imss": {
+    "employer": {
+      "sickness_maternity": {
+        "cash_benefits": 0.0070,
+        "kind_benefits": 0.0025,
+        "excess": 0.0105,
+        "description": "Enfermedad y Maternidad"
+      },
+      "disability_life": 0.0175,
+      "retirement": 0.0200,
+      "unemployment_old_age": {
+        "base": 0.0315,
+        "excess": 0.0200,
+        "description": "Cesantía y Vejez"
+      },
+      "daycare": 0.0100,
+      "work_risk": {
+        "class_i": 0.0054355,
+        "class_ii": 0.0113065,
+        "class_iii": 0.0259840,
+        "class_iv": 0.0465325,
+        "class_v": 0.0758875
+      }
+    },
+    
+    "employee": {
+      "sickness_maternity": 0.0025,
+      "disability_life": 0.00625,
+      "unemployment_old_age": 0.01125,
+      "retirement": 0.0000,
+      "description": "Employee contributions to IMSS"
+    }
+  },
+  
+  "infonavit": {
+    "employer": {
+      "rate": 0.0500,
+      "description": "Mandatory employer contribution to INFONAVIT"
+    },
+    "employee": {
+      "rate_type": "variable",
+      "description": "Variable based on individual credit, not a fixed percentage",
+      "calculation_methods": ["fixed_fee", "salary_multiple", "percentage"]
+    }
+  },
+  
+  "other_contributions": {
+    "voluntary_sar_contribution": 0.0200,
+    "fonacot": {
+      "max_deduction_percentage": 0.30,
+      "max_term_months": 36,
+      "description": "Maximum FONACOT loan deduction from net salary"
+    }
+  }
+}

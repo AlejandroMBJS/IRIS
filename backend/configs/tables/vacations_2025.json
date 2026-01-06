@@ -1,0 +1,66 @@
+{
+  "year": 2025,
+  "description": "Vacation days by years of service (Federal Labor Law, reform 2023)",
+  "brackets": [
+    {
+      "min_years": 1,
+      "max_years": 1,
+      "days": 12
+    },
+    {
+      "min_years": 2,
+      "max_years": 5,
+      "days": 14
+    },
+    {
+      "min_years": 6,
+      "max_years": 10,
+      "days": 16
+    },
+    {
+      "min_years": 11,
+      "max_years": 15,
+      "days": 18
+    },
+    {
+      "min_years": 16,
+      "max_years": 20,
+      "days": 20
+    },
+    {
+      "min_years": 21,
+      "max_years": 25,
+      "days": 22
+    },
+    {
+      "min_years": 26,
+      "max_years": 30,
+      "days": 24
+    },
+    {
+      "min_years": 31,
+      "max_years": 35,
+      "days": 26
+    },
+    {
+      "min_years": 36,
+      "max_years": 40,
+      "days": 28
+    },
+    {
+      "min_years": 41,
+      "max_years": 45,
+      "days": 30
+    },
+    {
+      "min_years": 46,
+      "max_years": 50,
+      "days": 32
+    },
+    {
+      "min_years": 51,
+      "max_years": 99,
+      "days": 34
+    }
+  ]
+}

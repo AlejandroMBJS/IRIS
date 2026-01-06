@@ -1,0 +1,49 @@
+{
+  "periodicity": "monthly",
+  "year": 2025,
+  "description": "Monthly Income Tax Withholding Table 2025 - Salaried Employees",
+  "rows": [
+    {
+      "lower_limit": 0.01,
+      "upper_limit": 9440.18,
+      "fixed_fee": 0.00,
+      "percentage": 1.92
+    },
+    {
+      "lower_limit": 9440.19,
+      "upper_limit": 80047.92,
+      "fixed_fee": 181.31,
+      "percentage": 6.40
+    },
+    {
+      "lower_limit": 80047.93,
+      "upper_limit": 142562.30,
+      "fixed_fee": 4704.21,
+      "percentage": 10.88
+    },
+    {
+      "lower_limit": 142562.31,
+      "upper_limit": 167000.00,
+      "fixed_fee": 11607.37,
+      "percentage": 16.00
+    },
+    {
+      "lower_limit": 167000.01,
+      "upper_limit": 500000.00,
+      "fixed_fee": 15516.57,
+      "percentage": 17.92
+    },
+    {
+      "lower_limit": 500000.01,
+      "upper_limit": 1000000.00,
+      "fixed_fee": 74817.57,
+      "percentage": 21.36
+    },
+    {
+      "lower_limit": 1000000.01,
+      "upper_limit": 999999999.99,
+      "fixed_fee": 181817.57,
+      "percentage": 23.52
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "christmas_bonus": {
+    "minimum_days": 15,
+    "proportional_calculation": true,
+    "calculation_base": ["base_salary", "fixed_bonuses"],
+    "payment_deadline": "december_20",
+    "description": "Aguinaldo - Annual Christmas bonus"
+  },
+  
+  "vacations": {
+    "first_year_days": 12,
+    "vacation_bonus_percentage": 0.25,
+    "antiquity_table_path": "./configs/tables/vacations_2025.json",
+    "description": "Vacation days and vacation bonus"
+  },
+  
+  "work_schedule": {
+    "daily_hours": 8.0,
+    "weekly_days": 6,
+    "yearly_work_days": 260,
+    "average_month_days": 30.4,
+    "description": "Standard work schedule parameters"
+  },
+  
+  "overtime": {
+    "double_time_percentage": 1.00,
+    "triple_time_percentage": 2.00,
+    "daily_limit_hours": 3.0,
+    "description": "Overtime calculation parameters"
+  },
+  
+  "sunday_premium": {
+    "percentage": 0.25,
+    "description": "Premium pay for working on Sundays"
+  },
+  
+  "integration_factor": {
+    "base_value": 1.0452,
+    "calculation_method": "includes_christmas_vacation_bonus",
+    "table_path": "./configs/tables/factor_integration.json",
+    "description": "Factor for Integrated Daily Salary calculation"
+  }
+}

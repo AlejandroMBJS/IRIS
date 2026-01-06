@@ -1,0 +1,4 @@
+Test: Register Admin User
+Endpoint: /auth/register
+Method: POST
+Command: curl -s -w '\n%{http_code}' -X POST 'http://localhost:8080/api/v1/auth/register' -H 'Content-Type: application/json' -d '{"company_name": "TestCorp", "company_rfc": "TCS123456ABC", "email": "test_user_1765120549192240973@example.com", "password": "Password123!", "role": "admin", "full_name": "Test Admin"}'

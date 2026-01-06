@@ -1,0 +1,20 @@
+{
+  "isr_tables": {
+    "base_path": "./configs/tables/isr",
+    "supported_periods": ["monthly", "biweekly", "weekly"],
+    "default_period": "biweekly",
+    "description": "Income tax withholding tables"
+  },
+  
+  "subsidy_tables": {
+    "path": "./configs/tables/subsidy_2025.json",
+    "description": "Employment subsidy calculation tables"
+  },
+  
+  "holiday_calendar": {
+    "path": "./configs/holidays/slp_2025.json",
+    "includes_federal": true,
+    "includes_state": true,
+    "description": "Official holiday calendar"
+  }
+}

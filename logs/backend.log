@@ -1,0 +1,1393 @@
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.049ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="cost_centers"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.060ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "cost_centers" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.025ms] [34;1m[rows:-][0m SELECT * FROM `cost_centers` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.020ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "cost_centers" AND (sql LIKE "%CONSTRAINT ""fk_cost_centers_company"" %" OR sql LIKE "%CONSTRAINT fk_cost_centers_company %" OR sql LIKE "%CONSTRAINT `fk_cost_centers_company`%" OR sql LIKE "%CONSTRAINT [fk_cost_centers_company]%" OR sql LIKE "%CONSTRAINT 	fk_cost_centers_company	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "cost_centers" AND name = "idx_cost_centers_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="shifts"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.038ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "shifts" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `shifts` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "shifts" AND name = "shifts"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.243ms] [34;1m[rows:0][0m CREATE TABLE `shifts__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`name` varchar(100) NOT NULL,`code` varchar(50) NOT NULL,`start_time` varchar(10) NOT NULL,`end_time` varchar(10) NOT NULL,`is_rest_day` numeric DEFAULT false,`is_active` numeric DEFAULT true,`description` varchar(255),`break_minutes` integer DEFAULT 30,`break_start_time` varchar(10),`work_hours_per_day` decimal(4,2) DEFAULT 8,`work_days` text DEFAULT "[1,2,3,4,5]",`color` varchar(7) DEFAULT "#3B82F6",`display_order` integer DEFAULT 0,`is_night_shift` numeric DEFAULT false,`collar_types` text DEFAULT "[]",`company_id` text,PRIMARY KEY (`id`),CONSTRAINT `fk_shifts_company` FOREIGN KEY (`company_id`) REFERENCES `companies`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.024ms] [34;1m[rows:0][0m INSERT INTO `shifts__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`name`,`code`,`start_time`,`end_time`,`is_rest_day`,`is_active`,`description`,`break_minutes`,`break_start_time`,`work_hours_per_day`,`work_days`,`color`,`display_order`,`is_night_shift`,`collar_types`,`company_id`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`name`,`code`,`start_time`,`end_time`,`is_rest_day`,`is_active`,`description`,`break_minutes`,`break_start_time`,`work_hours_per_day`,`work_days`,`color`,`display_order`,`is_night_shift`,`collar_types`,`company_id` FROM `shifts`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.145ms] [34;1m[rows:0][0m DROP TABLE `shifts`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.898ms] [34;1m[rows:0][0m ALTER TABLE `shifts__temp` RENAME TO `shifts`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.053ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "shifts" AND (sql LIKE "%CONSTRAINT ""fk_shifts_company"" %" OR sql LIKE "%CONSTRAINT fk_shifts_company %" OR sql LIKE "%CONSTRAINT `fk_shifts_company`%" OR sql LIKE "%CONSTRAINT [fk_shifts_company]%" OR sql LIKE "%CONSTRAINT 	fk_shifts_company	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "shifts" AND name = "idx_shifts_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.249ms] [34;1m[rows:0][0m CREATE INDEX `idx_shifts_deleted_at` ON `shifts`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.028ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="employees"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.058ms] [34;1m[rows:5][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "employees" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.052ms] [34;1m[rows:-][0m SELECT * FROM `employees` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND name = "employees"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.276ms] [34;1m[rows:0][0m CREATE TABLE `employees__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_number` varchar(50) NOT NULL,`first_name` varchar(100) NOT NULL,`last_name` varchar(100) NOT NULL,`mother_last_name` varchar(100),`date_of_birth` date NOT NULL,`gender` varchar(20),`marital_status` varchar(50),`rfc` varchar(13) NOT NULL,`curp` varchar(18) NOT NULL,`nss` varchar(11),`infonavit_credit` varchar(50),`personal_email` varchar(255),`personal_phone` varchar(20),`emergency_contact` varchar(255),`emergency_phone` varchar(20),`street` varchar(255),`exterior_number` varchar(20),`interior_number` varchar(20),`neighborhood` varchar(100),`municipality` varchar(100),`state` varchar(100) DEFAULT "San Luis Potosí",`postal_code` varchar(10),`country` varchar(100) DEFAULT "México",`hire_date` date NOT NULL,`termination_date` date,`employment_status` varchar(50) DEFAULT "active",`employee_type` varchar(50),`collar_type` varchar(20) DEFAULT "white_collar",`pay_frequency` varchar(20) DEFAULT "biweekly",`is_sindicalizado` numeric DEFAULT false,`daily_salary` decimal(12,2) NOT NULL,`integrated_daily_salary` decimal(12,2),`payment_method` varchar(50) DEFAULT "bank_transfer",`bank_name` varchar(100),`bank_account` varchar(50),`clabe` varchar(18),`imss_registration_date` date,`regime` varchar(50) DEFAULT "salary",`tax_regime` varchar(50),`company_id` text NOT NULL,`department_id` text,`position_id` text,`cost_center_id` text,`created_by` text,`updated_by` text,`nationality` varchar(100) DEFAULT "Mexicana",`birth_state` varchar(100),`education_level` varchar(100),`cell_phone` varchar(20),`emergency_relationship` varchar(100),`contract_start_date` date,`contract_end_date` date,`production_area` varchar(100),`location` varchar(100),`patronal_registry` varchar(50),`company_name` varchar(255),`shift_id` text,`supervisor_id` text,`team_name` varchar(100),`package_code` varchar(50),`route` varchar(100),`transport_stop` varchar(255),`recruitment_source` varchar(100),`fiscal_postal_code` varchar(10),`fiscal_name` varchar(255),`child1_gender` varchar(20),`child2_gender` varchar(20),`child3_gender` varchar(20),`child4_gender` varchar(20),PRIMARY KEY (`id`),CONSTRAINT `fk_employees_updated_by_user` FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_companies_employees` FOREIGN KEY (`company_id`) REFERENCES `companies`(`id`),CONSTRAINT `fk_employees_created_by_user` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_cost_centers_employees` FOREIGN KEY (`cost_center_id`) REFERENCES `cost_centers`(`id`),CONSTRAINT `chk_employees_pay_frequency` CHECK (pay_frequency IN ('weekly','biweekly','monthly')),CONSTRAINT `chk_employees_employee_type` CHECK (employee_type IN ('permanent','temporary','contractor','intern')),CONSTRAINT `chk_employees_employment_status` CHECK (employment_status IN ('active','inactive','on_leave','terminated')),CONSTRAINT `chk_employees_gender` CHECK (gender IN ('male','female','other')),CONSTRAINT `chk_employees_collar_type` CHECK (collar_type IN ('white_collar','blue_collar','gray_collar')),CONSTRAINT `fk_shifts_employees` FOREIGN KEY (`shift_id`) REFERENCES `shifts`(`id`),CONSTRAINT `fk_employees_supervisor` FOREIGN KEY (`supervisor_id`) REFERENCES `employees`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.249ms] [34;1m[rows:13][0m INSERT INTO `employees__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_number`,`first_name`,`last_name`,`mother_last_name`,`date_of_birth`,`gender`,`marital_status`,`rfc`,`curp`,`nss`,`infonavit_credit`,`personal_email`,`personal_phone`,`emergency_contact`,`emergency_phone`,`street`,`exterior_number`,`interior_number`,`neighborhood`,`municipality`,`state`,`postal_code`,`country`,`hire_date`,`termination_date`,`employment_status`,`employee_type`,`collar_type`,`pay_frequency`,`is_sindicalizado`,`daily_salary`,`integrated_daily_salary`,`payment_method`,`bank_name`,`bank_account`,`clabe`,`imss_registration_date`,`regime`,`tax_regime`,`company_id`,`department_id`,`position_id`,`cost_center_id`,`created_by`,`updated_by`,`nationality`,`birth_state`,`education_level`,`cell_phone`,`emergency_relationship`,`contract_start_date`,`contract_end_date`,`production_area`,`location`,`patronal_registry`,`company_name`,`shift_id`,`supervisor_id`,`team_name`,`package_code`,`route`,`transport_stop`,`recruitment_source`,`fiscal_postal_code`,`fiscal_name`,`child1_gender`,`child2_gender`,`child3_gender`,`child4_gender`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_number`,`first_name`,`last_name`,`mother_last_name`,`date_of_birth`,`gender`,`marital_status`,`rfc`,`curp`,`nss`,`infonavit_credit`,`personal_email`,`personal_phone`,`emergency_contact`,`emergency_phone`,`street`,`exterior_number`,`interior_number`,`neighborhood`,`municipality`,`state`,`postal_code`,`country`,`hire_date`,`termination_date`,`employment_status`,`employee_type`,`collar_type`,`pay_frequency`,`is_sindicalizado`,`daily_salary`,`integrated_daily_salary`,`payment_method`,`bank_name`,`bank_account`,`clabe`,`imss_registration_date`,`regime`,`tax_regime`,`company_id`,`department_id`,`position_id`,`cost_center_id`,`created_by`,`updated_by`,`nationality`,`birth_state`,`education_level`,`cell_phone`,`emergency_relationship`,`contract_start_date`,`contract_end_date`,`production_area`,`location`,`patronal_registry`,`company_name`,`shift_id`,`supervisor_id`,`team_name`,`package_code`,`route`,`transport_stop`,`recruitment_source`,`fiscal_postal_code`,`fiscal_name`,`child1_gender`,`child2_gender`,`child3_gender`,`child4_gender` FROM `employees`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.171ms] [34;1m[rows:13][0m DROP TABLE `employees`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.564ms] [34;1m[rows:13][0m ALTER TABLE `employees__temp` RENAME TO `employees`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.029ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.025ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND name = "employees"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.315ms] [34;1m[rows:13][0m CREATE TABLE `employees__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_number` varchar(50) NOT NULL,`first_name` varchar(100) NOT NULL,`last_name` varchar(100) NOT NULL,`mother_last_name` varchar(100),`date_of_birth` date NOT NULL,`gender` varchar(20),`marital_status` varchar(50),`rfc` varchar(13) NOT NULL,`curp` varchar(18) NOT NULL,`nss` varchar(11),`infonavit_credit` varchar(50),`personal_email` varchar(255),`personal_phone` varchar(20),`emergency_contact` varchar(255),`emergency_phone` varchar(20),`street` varchar(255),`exterior_number` varchar(20),`interior_number` varchar(20),`neighborhood` varchar(100),`municipality` varchar(100),`state` varchar(100) DEFAULT "San Luis Potosí",`postal_code` varchar(10),`country` varchar(100) DEFAULT "México",`hire_date` date NOT NULL,`termination_date` date,`employment_status` varchar(50) DEFAULT "active",`employee_type` varchar(50),`collar_type` varchar(20) DEFAULT "white_collar",`pay_frequency` varchar(20) DEFAULT "biweekly",`is_sindicalizado` numeric DEFAULT false,`daily_salary` decimal(12,2) NOT NULL,`integrated_daily_salary` decimal(12,2),`payment_method` varchar(50) DEFAULT "bank_transfer",`bank_name` varchar(100),`bank_account` varchar(50),`clabe` varchar(18),`imss_registration_date` date,`regime` varchar(50) DEFAULT "salary",`tax_regime` varchar(50),`company_id` text NOT NULL,`department_id` text,`position_id` text,`cost_center_id` text,`created_by` text,`updated_by` text,`nationality` varchar(100) DEFAULT "Mexicana",`birth_state` varchar(100),`education_level` varchar(100),`cell_phone` varchar(20),`emergency_relationship` varchar(100),`contract_start_date` date,`contract_end_date` date,`production_area` varchar(100),`location` varchar(100),`patronal_registry` varchar(50),`company_name` varchar(255),`shift_id` text,`supervisor_id` text,`team_name` varchar(100),`package_code` varchar(50),`route` varchar(100),`transport_stop` varchar(255),`recruitment_source` varchar(100),`fiscal_postal_code` varchar(10),`fiscal_name` varchar(255),`child1_gender` varchar(20),`child2_gender` varchar(20),`child3_gender` varchar(20),`child4_gender` varchar(20),PRIMARY KEY (`id`),CONSTRAINT `fk_employees_updated_by_user` FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_companies_employees` FOREIGN KEY (`company_id`) REFERENCES `companies`(`id`),CONSTRAINT `fk_employees_created_by_user` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_cost_centers_employees` FOREIGN KEY (`cost_center_id`) REFERENCES `cost_centers`(`id`),CONSTRAINT `chk_employees_pay_frequency` CHECK (pay_frequency IN ('weekly','biweekly','monthly')),CONSTRAINT `chk_employees_employee_type` CHECK (employee_type IN ('permanent','temporary','contractor','intern')),CONSTRAINT `chk_employees_employment_status` CHECK (employment_status IN ('active','inactive','on_leave','terminated')),CONSTRAINT `chk_employees_gender` CHECK (gender IN ('male','female','other')),CONSTRAINT `chk_employees_collar_type` CHECK (collar_type IN ('white_collar','blue_collar','gray_collar')),CONSTRAINT `fk_shifts_employees` FOREIGN KEY (`shift_id`) REFERENCES `shifts`(`id`),CONSTRAINT `fk_employees_supervisor` FOREIGN KEY (`supervisor_id`) REFERENCES `employees`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.268ms] [34;1m[rows:13][0m INSERT INTO `employees__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_number`,`first_name`,`last_name`,`mother_last_name`,`date_of_birth`,`gender`,`marital_status`,`rfc`,`curp`,`nss`,`infonavit_credit`,`personal_email`,`personal_phone`,`emergency_contact`,`emergency_phone`,`street`,`exterior_number`,`interior_number`,`neighborhood`,`municipality`,`state`,`postal_code`,`country`,`hire_date`,`termination_date`,`employment_status`,`employee_type`,`collar_type`,`pay_frequency`,`is_sindicalizado`,`daily_salary`,`integrated_daily_salary`,`payment_method`,`bank_name`,`bank_account`,`clabe`,`imss_registration_date`,`regime`,`tax_regime`,`company_id`,`department_id`,`position_id`,`cost_center_id`,`created_by`,`updated_by`,`nationality`,`birth_state`,`education_level`,`cell_phone`,`emergency_relationship`,`contract_start_date`,`contract_end_date`,`production_area`,`location`,`patronal_registry`,`company_name`,`shift_id`,`supervisor_id`,`team_name`,`package_code`,`route`,`transport_stop`,`recruitment_source`,`fiscal_postal_code`,`fiscal_name`,`child1_gender`,`child2_gender`,`child3_gender`,`child4_gender`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_number`,`first_name`,`last_name`,`mother_last_name`,`date_of_birth`,`gender`,`marital_status`,`rfc`,`curp`,`nss`,`infonavit_credit`,`personal_email`,`personal_phone`,`emergency_contact`,`emergency_phone`,`street`,`exterior_number`,`interior_number`,`neighborhood`,`municipality`,`state`,`postal_code`,`country`,`hire_date`,`termination_date`,`employment_status`,`employee_type`,`collar_type`,`pay_frequency`,`is_sindicalizado`,`daily_salary`,`integrated_daily_salary`,`payment_method`,`bank_name`,`bank_account`,`clabe`,`imss_registration_date`,`regime`,`tax_regime`,`company_id`,`department_id`,`position_id`,`cost_center_id`,`created_by`,`updated_by`,`nationality`,`birth_state`,`education_level`,`cell_phone`,`emergency_relationship`,`contract_start_date`,`contract_end_date`,`production_area`,`location`,`patronal_registry`,`company_name`,`shift_id`,`supervisor_id`,`team_name`,`package_code`,`route`,`transport_stop`,`recruitment_source`,`fiscal_postal_code`,`fiscal_name`,`child1_gender`,`child2_gender`,`child3_gender`,`child4_gender` FROM `employees`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.065ms] [34;1m[rows:13][0m DROP TABLE `employees`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.665ms] [34;1m[rows:13][0m ALTER TABLE `employees__temp` RENAME TO `employees`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.062ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_employees_updated_by_user"" %" OR sql LIKE "%CONSTRAINT fk_employees_updated_by_user %" OR sql LIKE "%CONSTRAINT `fk_employees_updated_by_user`%" OR sql LIKE "%CONSTRAINT [fk_employees_updated_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_employees_updated_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_shifts_employees"" %" OR sql LIKE "%CONSTRAINT fk_shifts_employees %" OR sql LIKE "%CONSTRAINT `fk_shifts_employees`%" OR sql LIKE "%CONSTRAINT [fk_shifts_employees]%" OR sql LIKE "%CONSTRAINT 	fk_shifts_employees	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_cost_centers_employees"" %" OR sql LIKE "%CONSTRAINT fk_cost_centers_employees %" OR sql LIKE "%CONSTRAINT `fk_cost_centers_employees`%" OR sql LIKE "%CONSTRAINT [fk_cost_centers_employees]%" OR sql LIKE "%CONSTRAINT 	fk_cost_centers_employees	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_employees_supervisor"" %" OR sql LIKE "%CONSTRAINT fk_employees_supervisor %" OR sql LIKE "%CONSTRAINT `fk_employees_supervisor`%" OR sql LIKE "%CONSTRAINT [fk_employees_supervisor]%" OR sql LIKE "%CONSTRAINT 	fk_employees_supervisor	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_companies_employees"" %" OR sql LIKE "%CONSTRAINT fk_companies_employees %" OR sql LIKE "%CONSTRAINT `fk_companies_employees`%" OR sql LIKE "%CONSTRAINT [fk_companies_employees]%" OR sql LIKE "%CONSTRAINT 	fk_companies_employees	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""fk_employees_created_by_user"" %" OR sql LIKE "%CONSTRAINT fk_employees_created_by_user %" OR sql LIKE "%CONSTRAINT `fk_employees_created_by_user`%" OR sql LIKE "%CONSTRAINT [fk_employees_created_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_employees_created_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""chk_employees_employee_type"" %" OR sql LIKE "%CONSTRAINT chk_employees_employee_type %" OR sql LIKE "%CONSTRAINT `chk_employees_employee_type`%" OR sql LIKE "%CONSTRAINT [chk_employees_employee_type]%" OR sql LIKE "%CONSTRAINT 	chk_employees_employee_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""chk_employees_gender"" %" OR sql LIKE "%CONSTRAINT chk_employees_gender %" OR sql LIKE "%CONSTRAINT `chk_employees_gender`%" OR sql LIKE "%CONSTRAINT [chk_employees_gender]%" OR sql LIKE "%CONSTRAINT 	chk_employees_gender	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""chk_employees_pay_frequency"" %" OR sql LIKE "%CONSTRAINT chk_employees_pay_frequency %" OR sql LIKE "%CONSTRAINT `chk_employees_pay_frequency`%" OR sql LIKE "%CONSTRAINT [chk_employees_pay_frequency]%" OR sql LIKE "%CONSTRAINT 	chk_employees_pay_frequency	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""chk_employees_employment_status"" %" OR sql LIKE "%CONSTRAINT chk_employees_employment_status %" OR sql LIKE "%CONSTRAINT `chk_employees_employment_status`%" OR sql LIKE "%CONSTRAINT [chk_employees_employment_status]%" OR sql LIKE "%CONSTRAINT 	chk_employees_employment_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employees" AND (sql LIKE "%CONSTRAINT ""chk_employees_collar_type"" %" OR sql LIKE "%CONSTRAINT chk_employees_collar_type %" OR sql LIKE "%CONSTRAINT `chk_employees_collar_type`%" OR sql LIKE "%CONSTRAINT [chk_employees_collar_type]%" OR sql LIKE "%CONSTRAINT 	chk_employees_collar_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employees" AND name = "idx_employees_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.388ms] [34;1m[rows:13][0m CREATE INDEX `idx_employees_deleted_at` ON `employees`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.036ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employees" AND name = "idx_employees_employee_number"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.468ms] [34;1m[rows:13][0m CREATE UNIQUE INDEX `idx_employees_employee_number` ON `employees`(`employee_number`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.020ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employees" AND name = "idx_employees_rfc"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.165ms] [34;1m[rows:13][0m CREATE UNIQUE INDEX `idx_employees_rfc` ON `employees`(`rfc`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employees" AND name = "idx_employees_curp"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.664ms] [34;1m[rows:13][0m CREATE UNIQUE INDEX `idx_employees_curp` ON `employees`(`curp`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="users"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.051ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "users" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `users` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "users" AND (sql LIKE "%CONSTRAINT ""fk_users_employee"" %" OR sql LIKE "%CONSTRAINT fk_users_employee %" OR sql LIKE "%CONSTRAINT `fk_users_employee`%" OR sql LIKE "%CONSTRAINT [fk_users_employee]%" OR sql LIKE "%CONSTRAINT 	fk_users_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "users" AND (sql LIKE "%CONSTRAINT ""fk_users_supervisor"" %" OR sql LIKE "%CONSTRAINT fk_users_supervisor %" OR sql LIKE "%CONSTRAINT `fk_users_supervisor`%" OR sql LIKE "%CONSTRAINT [fk_users_supervisor]%" OR sql LIKE "%CONSTRAINT 	fk_users_supervisor	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "users" AND (sql LIKE "%CONSTRAINT ""fk_users_general_manager"" %" OR sql LIKE "%CONSTRAINT fk_users_general_manager %" OR sql LIKE "%CONSTRAINT `fk_users_general_manager`%" OR sql LIKE "%CONSTRAINT [fk_users_general_manager]%" OR sql LIKE "%CONSTRAINT 	fk_users_general_manager	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "users" AND (sql LIKE "%CONSTRAINT ""fk_companies_users"" %" OR sql LIKE "%CONSTRAINT fk_companies_users %" OR sql LIKE "%CONSTRAINT `fk_companies_users`%" OR sql LIKE "%CONSTRAINT [fk_companies_users]%" OR sql LIKE "%CONSTRAINT 	fk_companies_users	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "users" AND name = "idx_users_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "users" AND name = "idx_users_email"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="companies"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.036ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "companies" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT * FROM `companies` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "companies" AND (sql LIKE "%CONSTRAINT ""fk_companies_created_by_user"" %" OR sql LIKE "%CONSTRAINT fk_companies_created_by_user %" OR sql LIKE "%CONSTRAINT `fk_companies_created_by_user`%" OR sql LIKE "%CONSTRAINT [fk_companies_created_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_companies_created_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "companies" AND (sql LIKE "%CONSTRAINT ""fk_companies_updated_by_user"" %" OR sql LIKE "%CONSTRAINT fk_companies_updated_by_user %" OR sql LIKE "%CONSTRAINT `fk_companies_updated_by_user`%" OR sql LIKE "%CONSTRAINT [fk_companies_updated_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_companies_updated_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "companies" AND name = "idx_companies_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "companies" AND name = "idx_companies_rfc"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="payroll_periods"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.036ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "payroll_periods" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `payroll_periods` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_periods" AND (sql LIKE "%CONSTRAINT ""fk_payroll_periods_closed_by_user"" %" OR sql LIKE "%CONSTRAINT fk_payroll_periods_closed_by_user %" OR sql LIKE "%CONSTRAINT `fk_payroll_periods_closed_by_user`%" OR sql LIKE "%CONSTRAINT [fk_payroll_periods_closed_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_periods_closed_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_periods" AND (sql LIKE "%CONSTRAINT ""fk_payroll_periods_created_by_user"" %" OR sql LIKE "%CONSTRAINT fk_payroll_periods_created_by_user %" OR sql LIKE "%CONSTRAINT `fk_payroll_periods_created_by_user`%" OR sql LIKE "%CONSTRAINT [fk_payroll_periods_created_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_periods_created_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_periods" AND (sql LIKE "%CONSTRAINT ""chk_payroll_periods_period_type"" %" OR sql LIKE "%CONSTRAINT chk_payroll_periods_period_type %" OR sql LIKE "%CONSTRAINT `chk_payroll_periods_period_type`%" OR sql LIKE "%CONSTRAINT [chk_payroll_periods_period_type]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_periods_period_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_periods" AND (sql LIKE "%CONSTRAINT ""chk_payroll_periods_status"" %" OR sql LIKE "%CONSTRAINT chk_payroll_periods_status %" OR sql LIKE "%CONSTRAINT `chk_payroll_periods_status`%" OR sql LIKE "%CONSTRAINT [chk_payroll_periods_status]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_periods_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "payroll_periods" AND name = "idx_payroll_periods_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "payroll_periods" AND name = "idx_payroll_periods_period_code"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="prenomina_metrics"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.035ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "prenomina_metrics" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.023ms] [34;1m[rows:-][0m SELECT * FROM `prenomina_metrics` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.015ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "prenomina_metrics" AND (sql LIKE "%CONSTRAINT ""fk_payroll_periods_prenomina_metrics"" %" OR sql LIKE "%CONSTRAINT fk_payroll_periods_prenomina_metrics %" OR sql LIKE "%CONSTRAINT `fk_payroll_periods_prenomina_metrics`%" OR sql LIKE "%CONSTRAINT [fk_payroll_periods_prenomina_metrics]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_periods_prenomina_metrics	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.029ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "prenomina_metrics" AND (sql LIKE "%CONSTRAINT ""fk_employees_prenomina_metrics"" %" OR sql LIKE "%CONSTRAINT fk_employees_prenomina_metrics %" OR sql LIKE "%CONSTRAINT `fk_employees_prenomina_metrics`%" OR sql LIKE "%CONSTRAINT [fk_employees_prenomina_metrics]%" OR sql LIKE "%CONSTRAINT 	fk_employees_prenomina_metrics	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "prenomina_metrics" AND (sql LIKE "%CONSTRAINT ""chk_prenomina_metrics_calculation_status"" %" OR sql LIKE "%CONSTRAINT chk_prenomina_metrics_calculation_status %" OR sql LIKE "%CONSTRAINT `chk_prenomina_metrics_calculation_status`%" OR sql LIKE "%CONSTRAINT [chk_prenomina_metrics_calculation_status]%" OR sql LIKE "%CONSTRAINT 	chk_prenomina_metrics_calculation_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "prenomina_metrics" AND name = "idx_prenomina_metrics_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="payroll_calculations"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.035ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "payroll_calculations" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.024ms] [34;1m[rows:-][0m SELECT * FROM `payroll_calculations` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.015ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_employee"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_employee %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_employee`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_employee]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_payroll_period"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_payroll_period %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_payroll_period`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_payroll_period]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_payroll_period	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_prenomina_metric"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_prenomina_metric %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_prenomina_metric`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_prenomina_metric]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_prenomina_metric	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_approved_by_user"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_approved_by_user %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_approved_by_user`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_approved_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_approved_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.021ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""chk_payroll_calculations_payroll_status"" %" OR sql LIKE "%CONSTRAINT chk_payroll_calculations_payroll_status %" OR sql LIKE "%CONSTRAINT `chk_payroll_calculations_payroll_status`%" OR sql LIKE "%CONSTRAINT [chk_payroll_calculations_payroll_status]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_calculations_payroll_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_calculations" AND (sql LIKE "%CONSTRAINT ""chk_payroll_calculations_calculation_status"" %" OR sql LIKE "%CONSTRAINT chk_payroll_calculations_calculation_status %" OR sql LIKE "%CONSTRAINT `chk_payroll_calculations_calculation_status`%" OR sql LIKE "%CONSTRAINT [chk_payroll_calculations_calculation_status]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_calculations_calculation_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "payroll_calculations" AND name = "idx_payroll_calculations_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="payroll_details"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.034ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "payroll_details" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `payroll_details` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_details" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_payroll_details"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_payroll_details %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_payroll_details`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_payroll_details]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_payroll_details	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_details" AND (sql LIKE "%CONSTRAINT ""chk_payroll_details_concept_type"" %" OR sql LIKE "%CONSTRAINT chk_payroll_details_concept_type %" OR sql LIKE "%CONSTRAINT `chk_payroll_details_concept_type`%" OR sql LIKE "%CONSTRAINT [chk_payroll_details_concept_type]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_details_concept_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "payroll_details" AND name = "idx_payroll_details_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="employer_contributions"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.032ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "employer_contributions" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `employer_contributions` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employer_contributions" AND (sql LIKE "%CONSTRAINT ""fk_employer_contributions_employee"" %" OR sql LIKE "%CONSTRAINT fk_employer_contributions_employee %" OR sql LIKE "%CONSTRAINT `fk_employer_contributions_employee`%" OR sql LIKE "%CONSTRAINT [fk_employer_contributions_employee]%" OR sql LIKE "%CONSTRAINT 	fk_employer_contributions_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employer_contributions" AND (sql LIKE "%CONSTRAINT ""fk_employer_contributions_payroll_period"" %" OR sql LIKE "%CONSTRAINT fk_employer_contributions_payroll_period %" OR sql LIKE "%CONSTRAINT `fk_employer_contributions_payroll_period`%" OR sql LIKE "%CONSTRAINT [fk_employer_contributions_payroll_period]%" OR sql LIKE "%CONSTRAINT 	fk_employer_contributions_payroll_period	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employer_contributions" AND (sql LIKE "%CONSTRAINT ""fk_payroll_calculations_employer_contribution"" %" OR sql LIKE "%CONSTRAINT fk_payroll_calculations_employer_contribution %" OR sql LIKE "%CONSTRAINT `fk_payroll_calculations_employer_contribution`%" OR sql LIKE "%CONSTRAINT [fk_payroll_calculations_employer_contribution]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_calculations_employer_contribution	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employer_contributions" AND name = "idx_employer_contributions_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employer_contributions" AND name = "idx_employer_contributions_payroll_calculation_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="incidence_categories"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.034ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "incidence_categories" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT * FROM `incidence_categories` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_categories" AND name = "idx_incidence_categories_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_categories" AND name = "idx_incidence_categories_code"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="incidence_types"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.030ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "incidence_types" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.025ms] [34;1m[rows:-][0m SELECT * FROM `incidence_types` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.015ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_types" AND name = "incidence_types"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.214ms] [34;1m[rows:13][0m CREATE TABLE `incidence_types__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`name` varchar(255) NOT NULL,`category` varchar(50) NOT NULL,`effect_type` varchar(50) NOT NULL,`is_calculated` numeric DEFAULT true,`calculation_method` varchar(50),`default_value` decimal(15,2),`description` text,`requires_evidence` numeric DEFAULT false,`category_id` text,`form_fields` JSON,`is_requestable` numeric DEFAULT false,`approval_flow` varchar(50) DEFAULT "standard",`display_order` integer DEFAULT 0,PRIMARY KEY (`id`),CONSTRAINT `chk_incidence_types_effect_type` CHECK (effect_type IN ('positive','negative','neutral')),CONSTRAINT `chk_incidence_types_category` CHECK (category IN ('absence','sick','vacation','overtime','delay','bonus','deduction','other')),CONSTRAINT `fk_incidence_categories_incidence_types` FOREIGN KEY (`category_id`) REFERENCES `incidence_categories`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.084ms] [34;1m[rows:7][0m INSERT INTO `incidence_types__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`name`,`category`,`effect_type`,`is_calculated`,`calculation_method`,`default_value`,`description`,`requires_evidence`,`category_id`,`form_fields`,`is_requestable`,`approval_flow`,`display_order`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`name`,`category`,`effect_type`,`is_calculated`,`calculation_method`,`default_value`,`description`,`requires_evidence`,`category_id`,`form_fields`,`is_requestable`,`approval_flow`,`display_order` FROM `incidence_types`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.088ms] [34;1m[rows:7][0m DROP TABLE `incidence_types`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.624ms] [34;1m[rows:7][0m ALTER TABLE `incidence_types__temp` RENAME TO `incidence_types`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.050ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_types" AND (sql LIKE "%CONSTRAINT ""fk_incidence_categories_incidence_types"" %" OR sql LIKE "%CONSTRAINT fk_incidence_categories_incidence_types %" OR sql LIKE "%CONSTRAINT `fk_incidence_categories_incidence_types`%" OR sql LIKE "%CONSTRAINT [fk_incidence_categories_incidence_types]%" OR sql LIKE "%CONSTRAINT 	fk_incidence_categories_incidence_types	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.020ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_types" AND (sql LIKE "%CONSTRAINT ""chk_incidence_types_category"" %" OR sql LIKE "%CONSTRAINT chk_incidence_types_category %" OR sql LIKE "%CONSTRAINT `chk_incidence_types_category`%" OR sql LIKE "%CONSTRAINT [chk_incidence_types_category]%" OR sql LIKE "%CONSTRAINT 	chk_incidence_types_category	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_types" AND (sql LIKE "%CONSTRAINT ""chk_incidence_types_effect_type"" %" OR sql LIKE "%CONSTRAINT chk_incidence_types_effect_type %" OR sql LIKE "%CONSTRAINT `chk_incidence_types_effect_type`%" OR sql LIKE "%CONSTRAINT [chk_incidence_types_effect_type]%" OR sql LIKE "%CONSTRAINT 	chk_incidence_types_effect_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_types" AND name = "idx_incidence_types_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.385ms] [34;1m[rows:7][0m CREATE INDEX `idx_incidence_types_deleted_at` ON `incidence_types`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.020ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="incidences"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.050ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "incidences" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.019ms] [34;1m[rows:-][0m SELECT * FROM `incidences` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND name = "incidences"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.170ms] [34;1m[rows:7][0m CREATE TABLE `incidences__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`payroll_period_id` text NOT NULL,`incidence_type_id` text NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`quantity` decimal(8,2) NOT NULL,`calculated_amount` decimal(15,2),`comments` text,`status` varchar(50) DEFAULT "pending",`approved_by` text,`approved_at` datetime,`absence_request_id` text,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`final_approval_at` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_payroll_periods_incidences` FOREIGN KEY (`payroll_period_id`) REFERENCES `payroll_periods`(`id`),CONSTRAINT `fk_incidences_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_incidences_approved_by_user` FOREIGN KEY (`approved_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_employees_incidences` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `chk_incidences_status` CHECK (status IN ('pending','approved','rejected','processed')))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.024ms] [34;1m[rows:0][0m INSERT INTO `incidences__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`payroll_period_id`,`incidence_type_id`,`start_date`,`end_date`,`quantity`,`calculated_amount`,`comments`,`status`,`approved_by`,`approved_at`,`absence_request_id`,`late_approval_flag`,`excluded_from_payroll`,`final_approval_at`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`payroll_period_id`,`incidence_type_id`,`start_date`,`end_date`,`quantity`,`calculated_amount`,`comments`,`status`,`approved_by`,`approved_at`,`absence_request_id`,`late_approval_flag`,`excluded_from_payroll`,`final_approval_at` FROM `incidences`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.146ms] [34;1m[rows:0][0m DROP TABLE `incidences`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.603ms] [34;1m[rows:0][0m ALTER TABLE `incidences__temp` RENAME TO `incidences`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.070ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.034ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND name = "incidences"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.221ms] [34;1m[rows:0][0m CREATE TABLE `incidences__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`payroll_period_id` text NOT NULL,`incidence_type_id` text NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`quantity` decimal(8,2) NOT NULL,`calculated_amount` decimal(15,2),`comments` text,`status` varchar(50) DEFAULT "pending",`approved_by` text,`approved_at` datetime,`absence_request_id` text,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`final_approval_at` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_payroll_periods_incidences` FOREIGN KEY (`payroll_period_id`) REFERENCES `payroll_periods`(`id`),CONSTRAINT `fk_incidences_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_incidences_approved_by_user` FOREIGN KEY (`approved_by`) REFERENCES `users`(`id`),CONSTRAINT `fk_employees_incidences` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `chk_incidences_status` CHECK (status IN ('pending','approved','rejected','processed')))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.023ms] [34;1m[rows:0][0m INSERT INTO `incidences__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`payroll_period_id`,`incidence_type_id`,`start_date`,`end_date`,`quantity`,`calculated_amount`,`comments`,`status`,`approved_by`,`approved_at`,`absence_request_id`,`late_approval_flag`,`excluded_from_payroll`,`final_approval_at`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`payroll_period_id`,`incidence_type_id`,`start_date`,`end_date`,`quantity`,`calculated_amount`,`comments`,`status`,`approved_by`,`approved_at`,`absence_request_id`,`late_approval_flag`,`excluded_from_payroll`,`final_approval_at` FROM `incidences`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.053ms] [34;1m[rows:0][0m DROP TABLE `incidences`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.636ms] [34;1m[rows:0][0m ALTER TABLE `incidences__temp` RENAME TO `incidences`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.031ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND (sql LIKE "%CONSTRAINT ""fk_payroll_periods_incidences"" %" OR sql LIKE "%CONSTRAINT fk_payroll_periods_incidences %" OR sql LIKE "%CONSTRAINT `fk_payroll_periods_incidences`%" OR sql LIKE "%CONSTRAINT [fk_payroll_periods_incidences]%" OR sql LIKE "%CONSTRAINT 	fk_payroll_periods_incidences	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND (sql LIKE "%CONSTRAINT ""fk_incidences_incidence_type"" %" OR sql LIKE "%CONSTRAINT fk_incidences_incidence_type %" OR sql LIKE "%CONSTRAINT `fk_incidences_incidence_type`%" OR sql LIKE "%CONSTRAINT [fk_incidences_incidence_type]%" OR sql LIKE "%CONSTRAINT 	fk_incidences_incidence_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND (sql LIKE "%CONSTRAINT ""fk_incidences_approved_by_user"" %" OR sql LIKE "%CONSTRAINT fk_incidences_approved_by_user %" OR sql LIKE "%CONSTRAINT `fk_incidences_approved_by_user`%" OR sql LIKE "%CONSTRAINT [fk_incidences_approved_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_incidences_approved_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND (sql LIKE "%CONSTRAINT ""fk_employees_incidences"" %" OR sql LIKE "%CONSTRAINT fk_employees_incidences %" OR sql LIKE "%CONSTRAINT `fk_employees_incidences`%" OR sql LIKE "%CONSTRAINT [fk_employees_incidences]%" OR sql LIKE "%CONSTRAINT 	fk_employees_incidences	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidences" AND (sql LIKE "%CONSTRAINT ""chk_incidences_status"" %" OR sql LIKE "%CONSTRAINT chk_incidences_status %" OR sql LIKE "%CONSTRAINT `chk_incidences_status`%" OR sql LIKE "%CONSTRAINT [chk_incidences_status]%" OR sql LIKE "%CONSTRAINT 	chk_incidences_status	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidences" AND name = "idx_incidences_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.728ms] [34;1m[rows:0][0m CREATE INDEX `idx_incidences_deleted_at` ON `incidences`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.019ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidences" AND name = "idx_incidence_export"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.528ms] [34;1m[rows:0][0m CREATE INDEX `idx_incidence_export` ON `incidences`(`late_approval_flag`,`excluded_from_payroll`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.021ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="incidence_evidences"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.050ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "incidence_evidences" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `incidence_evidences` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_evidences" AND (sql LIKE "%CONSTRAINT ""fk_incidence_evidences_incidence"" %" OR sql LIKE "%CONSTRAINT fk_incidence_evidences_incidence %" OR sql LIKE "%CONSTRAINT `fk_incidence_evidences_incidence`%" OR sql LIKE "%CONSTRAINT [fk_incidence_evidences_incidence]%" OR sql LIKE "%CONSTRAINT 	fk_incidence_evidences_incidence	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_evidences" AND (sql LIKE "%CONSTRAINT ""fk_incidence_evidences_uploaded_by_user"" %" OR sql LIKE "%CONSTRAINT fk_incidence_evidences_uploaded_by_user %" OR sql LIKE "%CONSTRAINT `fk_incidence_evidences_uploaded_by_user`%" OR sql LIKE "%CONSTRAINT [fk_incidence_evidences_uploaded_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_incidence_evidences_uploaded_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_evidences" AND name = "idx_incidence_evidences_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="incidence_tipo_mappings"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.038ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "incidence_tipo_mappings" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `incidence_tipo_mappings` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_tipo_mappings" AND name = "incidence_tipo_mappings"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.172ms] [34;1m[rows:0][0m CREATE TABLE `incidence_tipo_mappings__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`incidence_type_id` text NOT NULL,`tipo_code` varchar(10),`motivo` varchar(50),`template_type` varchar(20) NOT NULL,`hours_multiplier` decimal(5,2) DEFAULT 8,`notes` text,PRIMARY KEY (`id`),CONSTRAINT `fk_incidence_tipo_mappings_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`) ON DELETE CASCADE,CONSTRAINT `chk_incidence_tipo_mappings_template_type` CHECK (template_type IN ('vacaciones', 'faltas_extras')),CONSTRAINT `chk_incidence_tipo_mappings_motivo` CHECK (motivo IN ('EXTRAS', 'FALTA', 'PERHORAS')))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.034ms] [34;1m[rows:2][0m INSERT INTO `incidence_tipo_mappings__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`incidence_type_id`,`tipo_code`,`motivo`,`template_type`,`hours_multiplier`,`notes`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`incidence_type_id`,`tipo_code`,`motivo`,`template_type`,`hours_multiplier`,`notes` FROM `incidence_tipo_mappings`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.152ms] [34;1m[rows:2][0m DROP TABLE `incidence_tipo_mappings`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.602ms] [34;1m[rows:2][0m ALTER TABLE `incidence_tipo_mappings__temp` RENAME TO `incidence_tipo_mappings`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.039ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_tipo_mappings" AND (sql LIKE "%CONSTRAINT ""fk_incidence_tipo_mappings_incidence_type"" %" OR sql LIKE "%CONSTRAINT fk_incidence_tipo_mappings_incidence_type %" OR sql LIKE "%CONSTRAINT `fk_incidence_tipo_mappings_incidence_type`%" OR sql LIKE "%CONSTRAINT [fk_incidence_tipo_mappings_incidence_type]%" OR sql LIKE "%CONSTRAINT 	fk_incidence_tipo_mappings_incidence_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_tipo_mappings" AND (sql LIKE "%CONSTRAINT ""chk_incidence_tipo_mappings_motivo"" %" OR sql LIKE "%CONSTRAINT chk_incidence_tipo_mappings_motivo %" OR sql LIKE "%CONSTRAINT `chk_incidence_tipo_mappings_motivo`%" OR sql LIKE "%CONSTRAINT [chk_incidence_tipo_mappings_motivo]%" OR sql LIKE "%CONSTRAINT 	chk_incidence_tipo_mappings_motivo	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "incidence_tipo_mappings" AND (sql LIKE "%CONSTRAINT ""chk_incidence_tipo_mappings_template_type"" %" OR sql LIKE "%CONSTRAINT chk_incidence_tipo_mappings_template_type %" OR sql LIKE "%CONSTRAINT `chk_incidence_tipo_mappings_template_type`%" OR sql LIKE "%CONSTRAINT [chk_incidence_tipo_mappings_template_type]%" OR sql LIKE "%CONSTRAINT 	chk_incidence_tipo_mappings_template_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_tipo_mappings" AND name = "idx_incidence_tipo_mappings_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.423ms] [34;1m[rows:2][0m CREATE INDEX `idx_incidence_tipo_mappings_deleted_at` ON `incidence_tipo_mappings`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.031ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "incidence_tipo_mappings" AND name = "idx_incidence_tipo_mappings_incidence_type_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.413ms] [34;1m[rows:2][0m CREATE UNIQUE INDEX `idx_incidence_tipo_mappings_incidence_type_id` ON `incidence_tipo_mappings`(`incidence_type_id`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.028ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="payroll_concepts"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.054ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "payroll_concepts" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `payroll_concepts` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_concepts" AND (sql LIKE "%CONSTRAINT ""chk_payroll_concepts_category"" %" OR sql LIKE "%CONSTRAINT chk_payroll_concepts_category %" OR sql LIKE "%CONSTRAINT `chk_payroll_concepts_category`%" OR sql LIKE "%CONSTRAINT [chk_payroll_concepts_category]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_concepts_category	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "payroll_concepts" AND (sql LIKE "%CONSTRAINT ""chk_payroll_concepts_concept_type"" %" OR sql LIKE "%CONSTRAINT chk_payroll_concepts_concept_type %" OR sql LIKE "%CONSTRAINT `chk_payroll_concepts_concept_type`%" OR sql LIKE "%CONSTRAINT [chk_payroll_concepts_concept_type]%" OR sql LIKE "%CONSTRAINT 	chk_payroll_concepts_concept_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "payroll_concepts" AND name = "idx_payroll_concepts_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="salary_history"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.037ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "salary_history" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `salary_history` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "salary_history" AND name = "salary_history"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.176ms] [34;1m[rows:2][0m CREATE TABLE `salary_history__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`effective_date` date NOT NULL,`old_daily_salary` decimal(12,2) NOT NULL,`new_daily_salary` decimal(12,2) NOT NULL,`reason` text,`recorded_by` text,PRIMARY KEY (`id`),CONSTRAINT `fk_salary_history_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_salary_history_recorded_by_user` FOREIGN KEY (`recorded_by`) REFERENCES `users`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.018ms] [34;1m[rows:0][0m INSERT INTO `salary_history__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`effective_date`,`old_daily_salary`,`new_daily_salary`,`reason`,`recorded_by`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`effective_date`,`old_daily_salary`,`new_daily_salary`,`reason`,`recorded_by` FROM `salary_history`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.086ms] [34;1m[rows:0][0m DROP TABLE `salary_history`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.527ms] [34;1m[rows:0][0m ALTER TABLE `salary_history__temp` RENAME TO `salary_history`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "salary_history" AND name = "salary_history"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.130ms] [34;1m[rows:0][0m CREATE TABLE `salary_history__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`effective_date` date NOT NULL,`old_daily_salary` decimal(12,2) NOT NULL,`new_daily_salary` decimal(12,2) NOT NULL,`reason` text,`recorded_by` text,PRIMARY KEY (`id`),CONSTRAINT `fk_salary_history_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_salary_history_recorded_by_user` FOREIGN KEY (`recorded_by`) REFERENCES `users`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.014ms] [34;1m[rows:0][0m INSERT INTO `salary_history__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`effective_date`,`old_daily_salary`,`new_daily_salary`,`reason`,`recorded_by`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`effective_date`,`old_daily_salary`,`new_daily_salary`,`reason`,`recorded_by` FROM `salary_history`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.047ms] [34;1m[rows:0][0m DROP TABLE `salary_history`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.520ms] [34;1m[rows:0][0m ALTER TABLE `salary_history__temp` RENAME TO `salary_history`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "salary_history" AND (sql LIKE "%CONSTRAINT ""fk_salary_history_employee"" %" OR sql LIKE "%CONSTRAINT fk_salary_history_employee %" OR sql LIKE "%CONSTRAINT `fk_salary_history_employee`%" OR sql LIKE "%CONSTRAINT [fk_salary_history_employee]%" OR sql LIKE "%CONSTRAINT 	fk_salary_history_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "salary_history" AND (sql LIKE "%CONSTRAINT ""fk_salary_history_recorded_by_user"" %" OR sql LIKE "%CONSTRAINT fk_salary_history_recorded_by_user %" OR sql LIKE "%CONSTRAINT `fk_salary_history_recorded_by_user`%" OR sql LIKE "%CONSTRAINT [fk_salary_history_recorded_by_user]%" OR sql LIKE "%CONSTRAINT 	fk_salary_history_recorded_by_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "salary_history" AND name = "idx_salary_history_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.438ms] [34;1m[rows:0][0m CREATE INDEX `idx_salary_history_deleted_at` ON `salary_history`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="notifications"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.052ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "notifications" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT * FROM `notifications` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "notifications" AND (sql LIKE "%CONSTRAINT ""fk_notifications_company"" %" OR sql LIKE "%CONSTRAINT fk_notifications_company %" OR sql LIKE "%CONSTRAINT `fk_notifications_company`%" OR sql LIKE "%CONSTRAINT [fk_notifications_company]%" OR sql LIKE "%CONSTRAINT 	fk_notifications_company	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "notifications" AND (sql LIKE "%CONSTRAINT ""fk_notifications_actor_user"" %" OR sql LIKE "%CONSTRAINT fk_notifications_actor_user %" OR sql LIKE "%CONSTRAINT `fk_notifications_actor_user`%" OR sql LIKE "%CONSTRAINT [fk_notifications_actor_user]%" OR sql LIKE "%CONSTRAINT 	fk_notifications_actor_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "notifications" AND name = "idx_notifications_company_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="notification_reads"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.038ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "notification_reads" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `notification_reads` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "notification_reads" AND name = "idx_notification_reads_notification_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "notification_reads" AND name = "idx_notification_reads_user_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="absence_requests"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.037ms] [34;1m[rows:4][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "absence_requests" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT * FROM `absence_requests` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND name = "absence_requests"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.188ms] [34;1m[rows:0][0m CREATE TABLE `absence_requests__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`request_type` varchar(50) NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`total_days` decimal(5,2) NOT NULL,`reason` text NOT NULL,`status` varchar(50) DEFAULT "PENDING",`current_approval_stage` varchar(50) DEFAULT "SUPERVISOR",`hours_per_day` decimal(4,2),`paid_days` decimal(5,2),`unpaid_days` decimal(5,2),`unpaid_comments` text,`shift_details` text,`incidence_type_id` text,`custom_fields` JSON,`new_shift_id` text,`last_action_at` timestamp DEFAULT CURRENT_TIMESTAMP,`escalation_count` integer DEFAULT 0,`is_escalated` numeric DEFAULT false,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`payroll_cutoff_date` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_absence_requests_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_absence_requests_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_absence_requests_new_shift` FOREIGN KEY (`new_shift_id`) REFERENCES `shifts`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.026ms] [34;1m[rows:0][0m INSERT INTO `absence_requests__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date` FROM `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.174ms] [34;1m[rows:0][0m DROP TABLE `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.590ms] [34;1m[rows:0][0m ALTER TABLE `absence_requests__temp` RENAME TO `absence_requests`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.026ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.022ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND name = "absence_requests"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.196ms] [34;1m[rows:0][0m CREATE TABLE `absence_requests__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`request_type` varchar(50) NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`total_days` decimal(5,2) NOT NULL,`reason` text NOT NULL,`status` varchar(50) DEFAULT "PENDING",`current_approval_stage` varchar(50) DEFAULT "SUPERVISOR",`hours_per_day` decimal(4,2),`paid_days` decimal(5,2),`unpaid_days` decimal(5,2),`unpaid_comments` text,`shift_details` text,`incidence_type_id` text,`custom_fields` JSON,`new_shift_id` text,`last_action_at` timestamp DEFAULT CURRENT_TIMESTAMP,`escalation_count` integer DEFAULT 0,`is_escalated` numeric DEFAULT false,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`payroll_cutoff_date` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_absence_requests_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_absence_requests_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_absence_requests_new_shift` FOREIGN KEY (`new_shift_id`) REFERENCES `shifts`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.026ms] [34;1m[rows:0][0m INSERT INTO `absence_requests__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date` FROM `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.051ms] [34;1m[rows:0][0m DROP TABLE `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.605ms] [34;1m[rows:0][0m ALTER TABLE `absence_requests__temp` RENAME TO `absence_requests`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.031ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.025ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND name = "absence_requests"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.265ms] [34;1m[rows:0][0m CREATE TABLE `absence_requests__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`request_type` varchar(50) NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`total_days` decimal(5,2) NOT NULL,`reason` text NOT NULL,`status` varchar(50) DEFAULT "PENDING",`current_approval_stage` varchar(50) DEFAULT "SUPERVISOR",`hours_per_day` decimal(4,2),`paid_days` decimal(5,2),`unpaid_days` decimal(5,2),`unpaid_comments` text,`shift_details` text,`incidence_type_id` text,`custom_fields` JSON,`new_shift_id` text,`last_action_at` timestamp DEFAULT CURRENT_TIMESTAMP,`escalation_count` integer DEFAULT 0,`is_escalated` numeric DEFAULT false,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`payroll_cutoff_date` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_absence_requests_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_absence_requests_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_absence_requests_new_shift` FOREIGN KEY (`new_shift_id`) REFERENCES `shifts`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.036ms] [34;1m[rows:0][0m INSERT INTO `absence_requests__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date` FROM `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.072ms] [34;1m[rows:0][0m DROP TABLE `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.652ms] [34;1m[rows:0][0m ALTER TABLE `absence_requests__temp` RENAME TO `absence_requests`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.031ms] [34;1m[rows:1][0m PRAGMA foreign_keys
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.025ms] [34;1m[rows:-][0m SELECT sql FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND name = "absence_requests"
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.201ms] [34;1m[rows:0][0m CREATE TABLE `absence_requests__temp`  (`id` text,`created_at` datetime,`updated_at` datetime,`deleted_at` datetime,`employee_id` text NOT NULL,`request_type` varchar(50) NOT NULL,`start_date` date NOT NULL,`end_date` date NOT NULL,`total_days` decimal(5,2) NOT NULL,`reason` text NOT NULL,`status` varchar(50) DEFAULT "PENDING",`current_approval_stage` varchar(50) DEFAULT "SUPERVISOR",`hours_per_day` decimal(4,2),`paid_days` decimal(5,2),`unpaid_days` decimal(5,2),`unpaid_comments` text,`shift_details` text,`incidence_type_id` text,`custom_fields` JSON,`new_shift_id` text,`last_action_at` timestamp DEFAULT CURRENT_TIMESTAMP,`escalation_count` integer DEFAULT 0,`is_escalated` numeric DEFAULT false,`late_approval_flag` numeric DEFAULT false,`excluded_from_payroll` numeric DEFAULT false,`payroll_cutoff_date` timestamp,PRIMARY KEY (`id`),CONSTRAINT `fk_absence_requests_employee` FOREIGN KEY (`employee_id`) REFERENCES `employees`(`id`),CONSTRAINT `fk_absence_requests_incidence_type` FOREIGN KEY (`incidence_type_id`) REFERENCES `incidence_types`(`id`),CONSTRAINT `fk_absence_requests_new_shift` FOREIGN KEY (`new_shift_id`) REFERENCES `shifts`(`id`))
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.025ms] [34;1m[rows:0][0m INSERT INTO `absence_requests__temp`(`id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date`) SELECT `id`,`created_at`,`updated_at`,`deleted_at`,`employee_id`,`request_type`,`start_date`,`end_date`,`total_days`,`reason`,`status`,`current_approval_stage`,`hours_per_day`,`paid_days`,`unpaid_days`,`unpaid_comments`,`shift_details`,`incidence_type_id`,`custom_fields`,`new_shift_id`,`last_action_at`,`escalation_count`,`is_escalated`,`late_approval_flag`,`excluded_from_payroll`,`payroll_cutoff_date` FROM `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[0.051ms] [34;1m[rows:0][0m DROP TABLE `absence_requests`
+
+2025/12/18 09:13:13 [32m
+[0m[33m[1.518ms] [34;1m[rows:0][0m ALTER TABLE `absence_requests__temp` RENAME TO `absence_requests`
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.035ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND (sql LIKE "%CONSTRAINT ""fk_absence_requests_employee"" %" OR sql LIKE "%CONSTRAINT fk_absence_requests_employee %" OR sql LIKE "%CONSTRAINT `fk_absence_requests_employee`%" OR sql LIKE "%CONSTRAINT [fk_absence_requests_employee]%" OR sql LIKE "%CONSTRAINT 	fk_absence_requests_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND (sql LIKE "%CONSTRAINT ""fk_absence_requests_incidence_type"" %" OR sql LIKE "%CONSTRAINT fk_absence_requests_incidence_type %" OR sql LIKE "%CONSTRAINT `fk_absence_requests_incidence_type`%" OR sql LIKE "%CONSTRAINT [fk_absence_requests_incidence_type]%" OR sql LIKE "%CONSTRAINT 	fk_absence_requests_incidence_type	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "absence_requests" AND (sql LIKE "%CONSTRAINT ""fk_absence_requests_new_shift"" %" OR sql LIKE "%CONSTRAINT fk_absence_requests_new_shift %" OR sql LIKE "%CONSTRAINT `fk_absence_requests_new_shift`%" OR sql LIKE "%CONSTRAINT [fk_absence_requests_new_shift]%" OR sql LIKE "%CONSTRAINT 	fk_absence_requests_new_shift	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "absence_requests" AND name = "idx_absence_requests_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.278ms] [34;1m[rows:0][0m CREATE INDEX `idx_absence_requests_deleted_at` ON `absence_requests`(`deleted_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.019ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "absence_requests" AND name = "idx_absence_requests_last_action_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.792ms] [34;1m[rows:0][0m CREATE INDEX `idx_absence_requests_last_action_at` ON `absence_requests`(`last_action_at`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.015ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "absence_requests" AND name = "idx_absence_escalation"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[2.369ms] [34;1m[rows:0][0m CREATE INDEX `idx_absence_escalation` ON `absence_requests`(`is_escalated`)
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="approval_history"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.048ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "approval_history" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT * FROM `approval_history` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "approval_history" AND (sql LIKE "%CONSTRAINT ""fk_absence_requests_approval_history"" %" OR sql LIKE "%CONSTRAINT fk_absence_requests_approval_history %" OR sql LIKE "%CONSTRAINT `fk_absence_requests_approval_history`%" OR sql LIKE "%CONSTRAINT [fk_absence_requests_approval_history]%" OR sql LIKE "%CONSTRAINT 	fk_absence_requests_approval_history	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "approval_history" AND (sql LIKE "%CONSTRAINT ""fk_approval_history_approver"" %" OR sql LIKE "%CONSTRAINT fk_approval_history_approver %" OR sql LIKE "%CONSTRAINT `fk_approval_history_approver`%" OR sql LIKE "%CONSTRAINT [fk_approval_history_approver]%" OR sql LIKE "%CONSTRAINT 	fk_approval_history_approver	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "approval_history" AND name = "idx_approval_history_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="escalation_logs"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.039ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "escalation_logs" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.018ms] [34;1m[rows:-][0m SELECT * FROM `escalation_logs` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.021ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "escalation_logs" AND (sql LIKE "%CONSTRAINT ""fk_absence_requests_escalation_logs"" %" OR sql LIKE "%CONSTRAINT fk_absence_requests_escalation_logs %" OR sql LIKE "%CONSTRAINT `fk_absence_requests_escalation_logs`%" OR sql LIKE "%CONSTRAINT [fk_absence_requests_escalation_logs]%" OR sql LIKE "%CONSTRAINT 	fk_absence_requests_escalation_logs	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "escalation_logs" AND name = "idx_escalation_logs_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "escalation_logs" AND name = "idx_escalation_logs_absence_request_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="role_inheritances"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.039ms] [34;1m[rows:4][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "role_inheritances" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `role_inheritances` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "role_inheritances" AND name = "idx_role_inheritances_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "role_inheritances" AND name = "idx_role_inheritance_child"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "role_inheritances" AND name = "idx_role_inheritance_parent"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="hr_assignments"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "hr_assignments" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT * FROM `hr_assignments` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.014ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "hr_assignments" AND (sql LIKE "%CONSTRAINT ""fk_hr_assignments_hr_user"" %" OR sql LIKE "%CONSTRAINT fk_hr_assignments_hr_user %" OR sql LIKE "%CONSTRAINT `fk_hr_assignments_hr_user`%" OR sql LIKE "%CONSTRAINT [fk_hr_assignments_hr_user]%" OR sql LIKE "%CONSTRAINT 	fk_hr_assignments_hr_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "hr_assignments" AND name = "idx_hr_assignments_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="employee_shift_bases"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.035ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "employee_shift_bases" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT * FROM `employee_shift_bases` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employee_shift_bases" AND (sql LIKE "%CONSTRAINT ""fk_employee_shift_bases_employee"" %" OR sql LIKE "%CONSTRAINT fk_employee_shift_bases_employee %" OR sql LIKE "%CONSTRAINT `fk_employee_shift_bases_employee`%" OR sql LIKE "%CONSTRAINT [fk_employee_shift_bases_employee]%" OR sql LIKE "%CONSTRAINT 	fk_employee_shift_bases_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "employee_shift_bases" AND (sql LIKE "%CONSTRAINT ""fk_employee_shift_bases_shift"" %" OR sql LIKE "%CONSTRAINT fk_employee_shift_bases_shift %" OR sql LIKE "%CONSTRAINT `fk_employee_shift_bases_shift`%" OR sql LIKE "%CONSTRAINT [fk_employee_shift_bases_shift]%" OR sql LIKE "%CONSTRAINT 	fk_employee_shift_bases_shift	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "employee_shift_bases" AND name = "idx_employee_shift_bases_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="shift_exceptions"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "shift_exceptions" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT * FROM `shift_exceptions` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "shift_exceptions" AND (sql LIKE "%CONSTRAINT ""fk_shift_exceptions_employee"" %" OR sql LIKE "%CONSTRAINT fk_shift_exceptions_employee %" OR sql LIKE "%CONSTRAINT `fk_shift_exceptions_employee`%" OR sql LIKE "%CONSTRAINT [fk_shift_exceptions_employee]%" OR sql LIKE "%CONSTRAINT 	fk_shift_exceptions_employee	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "shift_exceptions" AND (sql LIKE "%CONSTRAINT ""fk_shift_exceptions_shift"" %" OR sql LIKE "%CONSTRAINT fk_shift_exceptions_shift %" OR sql LIKE "%CONSTRAINT `fk_shift_exceptions_shift`%" OR sql LIKE "%CONSTRAINT [fk_shift_exceptions_shift]%" OR sql LIKE "%CONSTRAINT 	fk_shift_exceptions_shift	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "shift_exceptions" AND (sql LIKE "%CONSTRAINT ""fk_shift_exceptions_created_by"" %" OR sql LIKE "%CONSTRAINT fk_shift_exceptions_created_by %" OR sql LIKE "%CONSTRAINT `fk_shift_exceptions_created_by`%" OR sql LIKE "%CONSTRAINT [fk_shift_exceptions_created_by]%" OR sql LIKE "%CONSTRAINT 	fk_shift_exceptions_created_by	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "shift_exceptions" AND name = "idx_shift_exceptions_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="announcements"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:2][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "announcements" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT * FROM `announcements` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.016ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "announcements" AND (sql LIKE "%CONSTRAINT ""fk_announcements_created_by"" %" OR sql LIKE "%CONSTRAINT fk_announcements_created_by %" OR sql LIKE "%CONSTRAINT `fk_announcements_created_by`%" OR sql LIKE "%CONSTRAINT [fk_announcements_created_by]%" OR sql LIKE "%CONSTRAINT 	fk_announcements_created_by	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "announcements" AND name = "idx_announcements_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="read_announcements"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.033ms] [34;1m[rows:1][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "read_announcements" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT * FROM `read_announcements` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "read_announcements" AND (sql LIKE "%CONSTRAINT ""fk_read_announcements_announcement"" %" OR sql LIKE "%CONSTRAINT fk_read_announcements_announcement %" OR sql LIKE "%CONSTRAINT `fk_read_announcements_announcement`%" OR sql LIKE "%CONSTRAINT [fk_read_announcements_announcement]%" OR sql LIKE "%CONSTRAINT 	fk_read_announcements_announcement	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "read_announcements" AND (sql LIKE "%CONSTRAINT ""fk_read_announcements_user"" %" OR sql LIKE "%CONSTRAINT fk_read_announcements_user %" OR sql LIKE "%CONSTRAINT `fk_read_announcements_user`%" OR sql LIKE "%CONSTRAINT [fk_read_announcements_user]%" OR sql LIKE "%CONSTRAINT 	fk_read_announcements_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="messages"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.037ms] [34;1m[rows:7][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "messages" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `messages` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "messages" AND (sql LIKE "%CONSTRAINT ""fk_messages_announcement"" %" OR sql LIKE "%CONSTRAINT fk_messages_announcement %" OR sql LIKE "%CONSTRAINT `fk_messages_announcement`%" OR sql LIKE "%CONSTRAINT [fk_messages_announcement]%" OR sql LIKE "%CONSTRAINT 	fk_messages_announcement	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "messages" AND (sql LIKE "%CONSTRAINT ""fk_messages_replies"" %" OR sql LIKE "%CONSTRAINT fk_messages_replies %" OR sql LIKE "%CONSTRAINT `fk_messages_replies`%" OR sql LIKE "%CONSTRAINT [fk_messages_replies]%" OR sql LIKE "%CONSTRAINT 	fk_messages_replies	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.010ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "messages" AND (sql LIKE "%CONSTRAINT ""fk_messages_sender"" %" OR sql LIKE "%CONSTRAINT fk_messages_sender %" OR sql LIKE "%CONSTRAINT `fk_messages_sender`%" OR sql LIKE "%CONSTRAINT [fk_messages_sender]%" OR sql LIKE "%CONSTRAINT 	fk_messages_sender	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "messages" AND (sql LIKE "%CONSTRAINT ""fk_messages_recipient"" %" OR sql LIKE "%CONSTRAINT fk_messages_recipient %" OR sql LIKE "%CONSTRAINT `fk_messages_recipient`%" OR sql LIKE "%CONSTRAINT [fk_messages_recipient]%" OR sql LIKE "%CONSTRAINT 	fk_messages_recipient	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_company_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.017ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_sender_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_recipient_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_announcement_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_parent_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "messages" AND name = "idx_messages_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="audit_logs"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.036ms] [34;1m[rows:5][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "audit_logs" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT * FROM `audit_logs` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "audit_logs" AND (sql LIKE "%CONSTRAINT ""fk_audit_logs_user"" %" OR sql LIKE "%CONSTRAINT fk_audit_logs_user %" OR sql LIKE "%CONSTRAINT `fk_audit_logs_user`%" OR sql LIKE "%CONSTRAINT [fk_audit_logs_user]%" OR sql LIKE "%CONSTRAINT 	fk_audit_logs_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "audit_logs" AND name = "idx_audit_logs_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "audit_logs" AND name = "idx_audit_logs_event_type"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "audit_logs" AND name = "idx_audit_logs_user_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "audit_logs" AND name = "idx_audit_logs_email"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="login_sessions"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.035ms] [34;1m[rows:4][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "login_sessions" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.011ms] [34;1m[rows:-][0m SELECT * FROM `login_sessions` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "login_sessions" AND (sql LIKE "%CONSTRAINT ""fk_login_sessions_user"" %" OR sql LIKE "%CONSTRAINT fk_login_sessions_user %" OR sql LIKE "%CONSTRAINT `fk_login_sessions_user`%" OR sql LIKE "%CONSTRAINT [fk_login_sessions_user]%" OR sql LIKE "%CONSTRAINT 	fk_login_sessions_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "login_sessions" AND name = "idx_login_sessions_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "login_sessions" AND name = "idx_login_sessions_user_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "login_sessions" AND name = "idx_login_sessions_session_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="page_visits"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.034ms] [34;1m[rows:4][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "page_visits" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.013ms] [34;1m[rows:-][0m SELECT * FROM `page_visits` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.012ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "table" AND tbl_name = "page_visits" AND (sql LIKE "%CONSTRAINT ""fk_page_visits_user"" %" OR sql LIKE "%CONSTRAINT fk_page_visits_user %" OR sql LIKE "%CONSTRAINT `fk_page_visits_user`%" OR sql LIKE "%CONSTRAINT [fk_page_visits_user]%" OR sql LIKE "%CONSTRAINT 	fk_page_visits_user	%")
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "page_visits" AND name = "idx_page_visits_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "page_visits" AND name = "idx_page_visits_user_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.007ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "page_visits" AND name = "idx_page_visits_session_id"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.006ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type='table' AND name="permissions"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.034ms] [34;1m[rows:3][0m SELECT sql FROM sqlite_master WHERE type IN ("table","index") AND tbl_name = "permissions" AND sql IS NOT NULL order by type = "table" desc
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.009ms] [34;1m[rows:-][0m SELECT * FROM `permissions` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "permissions" AND name = "idx_permissions_deleted_at"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/database/migrations.go:58
+[0m[33m[0.008ms] [34;1m[rows:-][0m SELECT count(*) FROM sqlite_master WHERE type = "index" AND tbl_name = "permissions" AND name = "idx_permission_role_resource"
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.072ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "absence" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.043ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "sick" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.048ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "vacation" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.039ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "overtime" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.039ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "delay" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.034ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "bonus" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.031ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "deduction" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:79
+[0m[33m[0.031ms] [34;1m[rows:1][0m SELECT * FROM `incidence_categories` WHERE code = "other" AND `incidence_categories`.`deleted_at` IS NULL ORDER BY `incidence_categories`.`id` LIMIT 1
+{"level":"info","msg":"Incidence categories verified/seeded","time":"2025-12-18T09:13:13-06:00"}
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:213
+[0m[33m[0.075ms] [34;1m[rows:8][0m SELECT * FROM `incidence_categories` WHERE `incidence_categories`.`deleted_at` IS NULL
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_category_service.go:225
+[0m[33m[0.028ms] [34;1m[rows:0][0m SELECT * FROM `incidence_types` WHERE category_id IS NULL AND `incidence_types`.`deleted_at` IS NULL
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/incidence_config_service.go:210
+[0m[33m[0.017ms] [34;1m[rows:1][0m SELECT count(*) FROM `incidence_tipo_mappings` WHERE `incidence_tipo_mappings`.`deleted_at` IS NULL
+{"level":"info","msg":"Tipo mappings verified/seeded","time":"2025-12-18T09:13:13-06:00"}
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/role_inheritance_service.go:239
+[0m[33m[0.018ms] [34;1m[rows:1][0m SELECT count(*) FROM `role_inheritances` WHERE `role_inheritances`.`deleted_at` IS NULL
+{"level":"info","msg":"Role inheritances verified/seeded","time":"2025-12-18T09:13:13-06:00"}
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.050ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.031ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "admin" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.045ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.029ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.029ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "hr" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.028ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.032ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "supervisor" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.031ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "manager" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.030ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.029ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.032ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "payroll_staff" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "calendar") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "inbox") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "payroll") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "approvals") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "users") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "shifts") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "employees") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.025ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "reports") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.027ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "configuration") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "incidences") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/services/permission_service.go:126
+[0m[33m[0.026ms] [34;1m[rows:1][0m SELECT * FROM `permissions` WHERE (role = "employee" AND resource = "announcements") AND `permissions`.`deleted_at` IS NULL ORDER BY `permissions`.`id` LIMIT 1
+{"level":"info","msg":"Permission matrix verified/seeded","time":"2025-12-18T09:13:13-06:00"}
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/repositories/payroll_period_repository.go:87
+[0m[33m[0.088ms] [34;1m[rows:1][0m SELECT * FROM `payroll_periods` WHERE period_code = "2025-W51" AND `payroll_periods`.`deleted_at` IS NULL ORDER BY `payroll_periods`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/repositories/payroll_period_repository.go:87
+[0m[33m[0.046ms] [34;1m[rows:1][0m SELECT * FROM `payroll_periods` WHERE period_code = "2025-BW25" AND `payroll_periods`.`deleted_at` IS NULL ORDER BY `payroll_periods`.`id` LIMIT 1
+
+2025/12/18 09:13:13 [32m/home/amb/iris-talent/backend/internal/repositories/payroll_period_repository.go:87
+[0m[33m[0.043ms] [34;1m[rows:1][0m SELECT * FROM `payroll_periods` WHERE period_code = "2025-M12" AND `payroll_periods`.`deleted_at` IS NULL ORDER BY `payroll_periods`.`id` LIMIT 1
+{"level":"info","msg":"Generated/verified 3 payroll periods","time":"2025-12-18T09:13:13-06:00"}
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /health                   --> backend/internal/api.(*HealthHandler).HealthCheck-fm (4 handlers)
+[GIN-debug] GET    /ready                    --> backend/internal/api.(*HealthHandler).ReadyCheck-fm (4 handlers)
+[GIN-debug] GET    /live                     --> backend/internal/api.(*HealthHandler).LivenessCheck-fm (4 handlers)
+[GIN-debug] GET    /api/v1/health            --> backend/internal/api.(*Router).Setup.func1 (4 handlers)
+[GIN-debug] POST   /api/v1/auth/register     --> backend/internal/api.(*AuthHandler).Register-fm (4 handlers)
+[GIN-debug] POST   /api/v1/auth/login        --> backend/internal/api.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/v1/auth/refresh      --> backend/internal/api.(*AuthHandler).RefreshToken-fm (4 handlers)
+[GIN-debug] POST   /api/v1/auth/logout       --> backend/internal/api.(*AuthHandler).Logout-fm (5 handlers)
+[GIN-debug] POST   /api/v1/auth/change-password --> backend/internal/api.(*AuthHandler).ChangePassword-fm (5 handlers)
+[GIN-debug] POST   /api/v1/auth/forgot-password --> backend/internal/api.(*AuthHandler).ForgotPassword-fm (4 handlers)
+[GIN-debug] POST   /api/v1/auth/reset-password --> backend/internal/api.(*AuthHandler).ResetPassword-fm (4 handlers)
+[GIN-debug] GET    /api/v1/auth/profile      --> backend/internal/api.(*AuthHandler).GetProfile-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/auth/profile      --> backend/internal/api.(*AuthHandler).UpdateProfile-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/periods   --> backend/internal/api.(*PayrollPeriodHandler).GetPeriods-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/periods/:id --> backend/internal/api.(*PayrollPeriodHandler).GetPeriod-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/periods   --> backend/internal/api.(*PayrollPeriodHandler).CreatePeriod-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/periods/generate --> backend/internal/api.(*PayrollPeriodHandler).GenerateCurrentPeriods-fm (5 handlers)
+[GIN-debug] GET    /api/v1/catalogs/concepts --> backend/internal/api.(*CatalogHandler).GetPayrollConcepts-fm (5 handlers)
+[GIN-debug] GET    /api/v1/catalogs/incidence-types --> backend/internal/api.(*CatalogHandler).GetIncidenceTypes-fm (5 handlers)
+[GIN-debug] POST   /api/v1/catalogs/concepts --> backend/internal/api.(*CatalogHandler).CreatePayrollConcept-fm (5 handlers)
+[GIN-debug] POST   /api/v1/reports/generate  --> backend/internal/api.(*ReportHandler).GenerateReport-fm (5 handlers)
+[GIN-debug] GET    /api/v1/reports/history   --> backend/internal/api.(*ReportHandler).GetReportHistory-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees         --> backend/internal/api.(*EmployeeHandler).ListEmployees-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/:id     --> backend/internal/api.(*EmployeeHandler).GetEmployee-fm (5 handlers)
+[GIN-debug] POST   /api/v1/employees         --> backend/internal/api.(*EmployeeHandler).CreateEmployee-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/employees/:id     --> backend/internal/api.(*EmployeeHandler).UpdateEmployee-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/employees/:id     --> backend/internal/api.(*EmployeeHandler).DeleteEmployee-fm (5 handlers)
+[GIN-debug] POST   /api/v1/employees/:id/terminate --> backend/internal/api.(*EmployeeHandler).TerminateEmployee-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/employees/:id/salary --> backend/internal/api.(*EmployeeHandler).UpdateSalary-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/stats   --> backend/internal/api.(*EmployeeHandler).GetEmployeeStats-fm (5 handlers)
+[GIN-debug] POST   /api/v1/employees/validate-ids --> backend/internal/api.(*EmployeeHandler).ValidateMexicanIDs-fm (5 handlers)
+[GIN-debug] POST   /api/v1/employees/import  --> backend/internal/api.(*EmployeeHandler).ImportEmployees-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/import/template --> backend/internal/api.(*EmployeeHandler).DownloadTemplate-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/:id/portal-user --> backend/internal/api.(*EmployeeHandler).GetEmployeePortalUser-fm (5 handlers)
+[GIN-debug] POST   /api/v1/employees/:id/portal-user --> backend/internal/api.(*EmployeeHandler).CreateEmployeePortalUser-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/employees/:id/portal-user --> backend/internal/api.(*EmployeeHandler).UpdateEmployeePortalUser-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/employees/:id/portal-user --> backend/internal/api.(*EmployeeHandler).DeleteEmployeePortalUser-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/calculate --> backend/internal/api.(*PayrollHandler).CalculatePayroll-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/bulk-calculate --> backend/internal/api.(*PayrollHandler).BulkCalculatePayroll-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/calculation/:period_id/:employee_id --> backend/internal/api.(*PayrollHandler).GetPayrollCalculation-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/period/:period_id --> backend/internal/api.(*PayrollHandler).GetPayrollByPeriod-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/payslip/:periodId/:employeeId --> backend/internal/api.(*PayrollHandler).GetPayslip-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/summary/:periodId --> backend/internal/api.(*PayrollHandler).GetPayrollSummary-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/approve/:periodId --> backend/internal/api.(*PayrollHandler).ApprovePayroll-fm (5 handlers)
+[GIN-debug] POST   /api/v1/payroll/payment/:periodId --> backend/internal/api.(*PayrollHandler).ProcessPayment-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/payment/:period_id --> backend/internal/api.(*PayrollHandler).GetPaymentStatus-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll/concept-totals/:periodId --> backend/internal/api.(*PayrollHandler).GetConceptTotals-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll-export/dual/:periodID --> backend/internal/api.(*PayrollExportHandler).GetDualExport-fm (5 handlers)
+[GIN-debug] GET    /api/v1/payroll-export/preview/:periodID --> backend/internal/api.(*PayrollExportHandler).GetExportPreview-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-config/tipo-mappings --> backend/internal/api.(*IncidenceConfigHandler).GetAllTipoMappings-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-config/tipo-mappings/:id --> backend/internal/api.(*IncidenceConfigHandler).GetTipoMappingByID-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidence-config/tipo-mappings --> backend/internal/api.(*IncidenceConfigHandler).CreateTipoMapping-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/incidence-config/tipo-mappings/:id --> backend/internal/api.(*IncidenceConfigHandler).UpdateTipoMapping-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/incidence-config/tipo-mappings/:id --> backend/internal/api.(*IncidenceConfigHandler).DeleteTipoMapping-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-config/unmapped-types --> backend/internal/api.(*IncidenceConfigHandler).GetUnmappedIncidenceTypes-fm (5 handlers)
+[GIN-debug] GET    /api/v1/role-inheritance  --> backend/internal/api.(*RoleInheritanceHandler).GetAllInheritances-fm (5 handlers)
+[GIN-debug] GET    /api/v1/role-inheritance/hierarchy --> backend/internal/api.(*RoleInheritanceHandler).GetHierarchy-fm (5 handlers)
+[GIN-debug] GET    /api/v1/role-inheritance/resolve/:role --> backend/internal/api.(*RoleInheritanceHandler).ResolveRoles-fm (5 handlers)
+[GIN-debug] GET    /api/v1/role-inheritance/valid-roles --> backend/internal/api.(*RoleInheritanceHandler).GetValidRoles-fm (5 handlers)
+[GIN-debug] POST   /api/v1/role-inheritance  --> backend/internal/api.(*RoleInheritanceHandler).CreateInheritance-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/role-inheritance/:id --> backend/internal/api.(*RoleInheritanceHandler).UpdateInheritance-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/role-inheritance/:id --> backend/internal/api.(*RoleInheritanceHandler).DeleteInheritance-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-categories --> backend/internal/api.(*IncidenceCategoryHandler).ListCategories-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-categories/:id --> backend/internal/api.(*IncidenceCategoryHandler).GetCategory-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidence-categories --> backend/internal/api.(*IncidenceCategoryHandler).CreateCategory-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/incidence-categories/:id --> backend/internal/api.(*IncidenceCategoryHandler).UpdateCategory-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/incidence-categories/:id --> backend/internal/api.(*IncidenceCategoryHandler).DeleteCategory-fm (5 handlers)
+[GIN-debug] PATCH  /api/v1/incidence-categories/:id/reorder --> backend/internal/api.(*IncidenceCategoryHandler).UpdateDisplayOrder-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidence-types   --> backend/internal/api.(*IncidenceHandler).ListIncidenceTypes-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidence-types   --> backend/internal/api.(*IncidenceHandler).CreateIncidenceType-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/incidence-types/:id --> backend/internal/api.(*IncidenceHandler).UpdateIncidenceType-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/incidence-types/:id --> backend/internal/api.(*IncidenceHandler).DeleteIncidenceType-fm (5 handlers)
+[GIN-debug] GET    /api/v1/requestable-incidence-types --> backend/internal/api.(*IncidenceHandler).ListRequestableIncidenceTypes-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidences        --> backend/internal/api.(*IncidenceHandler).ListIncidences-fm (5 handlers)
+[GIN-debug] GET    /api/v1/incidences/:id    --> backend/internal/api.(*IncidenceHandler).GetIncidence-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidences        --> backend/internal/api.(*IncidenceHandler).CreateIncidence-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/incidences/:id    --> backend/internal/api.(*IncidenceHandler).UpdateIncidence-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/incidences/:id    --> backend/internal/api.(*IncidenceHandler).DeleteIncidence-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidences/:id/approve --> backend/internal/api.(*IncidenceHandler).ApproveIncidence-fm (5 handlers)
+[GIN-debug] POST   /api/v1/incidences/:id/reject --> backend/internal/api.(*IncidenceHandler).RejectIncidence-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/:id/incidences --> backend/internal/api.(*IncidenceHandler).GetEmployeeIncidences-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/:id/vacation-balance --> backend/internal/api.(*IncidenceHandler).GetEmployeeVacationBalance-fm (5 handlers)
+[GIN-debug] GET    /api/v1/employees/:id/absence-summary --> backend/internal/api.(*IncidenceHandler).GetEmployeeAbsenceSummary-fm (5 handlers)
+[GIN-debug] POST   /api/v1/evidence/incidence/:incidence_id --> backend/internal/api.(*UploadHandler).UploadEvidence-fm (5 handlers)
+[GIN-debug] GET    /api/v1/evidence/incidence/:incidence_id --> backend/internal/api.(*UploadHandler).ListEvidence-fm (5 handlers)
+[GIN-debug] GET    /api/v1/evidence/:evidence_id --> backend/internal/api.(*UploadHandler).GetEvidence-fm (5 handlers)
+[GIN-debug] GET    /api/v1/evidence/:evidence_id/download --> backend/internal/api.(*UploadHandler).DownloadEvidence-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/evidence/:evidence_id --> backend/internal/api.(*UploadHandler).DeleteEvidence-fm (5 handlers)
+[GIN-debug] GET    /api/v1/notifications     --> backend/internal/api.(*NotificationHandler).GetNotifications-fm (5 handlers)
+[GIN-debug] GET    /api/v1/notifications/unread-count --> backend/internal/api.(*NotificationHandler).GetUnreadCount-fm (5 handlers)
+[GIN-debug] POST   /api/v1/notifications/:id/read --> backend/internal/api.(*NotificationHandler).MarkAsRead-fm (5 handlers)
+[GIN-debug] POST   /api/v1/notifications/read-all --> backend/internal/api.(*NotificationHandler).MarkAllAsRead-fm (5 handlers)
+[GIN-debug] POST   /api/v1/absence-requests  --> backend/internal/api.(*AbsenceRequestHandler).Create-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/my-requests --> backend/internal/api.(*AbsenceRequestHandler).GetMyRequests-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/pending/:stage --> backend/internal/api.(*AbsenceRequestHandler).GetPendingByStage-fm (5 handlers)
+[GIN-debug] POST   /api/v1/absence-requests/:id/approve --> backend/internal/api.(*AbsenceRequestHandler).Approve-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/absence-requests/:id --> backend/internal/api.(*AbsenceRequestHandler).Delete-fm (5 handlers)
+[GIN-debug] PATCH  /api/v1/absence-requests/:id/archive --> backend/internal/api.(*AbsenceRequestHandler).Archive-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/overlapping --> backend/internal/api.(*AbsenceRequestHandler).GetOverlapping-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/counts --> backend/internal/api.(*AbsenceRequestHandler).GetCounts-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/approved --> backend/internal/api.(*AbsenceRequestHandler).GetApproved-fm (5 handlers)
+[GIN-debug] GET    /api/v1/absence-requests/export --> backend/internal/api.(*AbsenceRequestHandler).ExportApproved-fm (5 handlers)
+[GIN-debug] GET    /api/v1/announcements     --> backend/internal/api.(*AnnouncementHandler).ListAnnouncements-fm (5 handlers)
+[GIN-debug] GET    /api/v1/announcements/:id --> backend/internal/api.(*AnnouncementHandler).GetAnnouncement-fm (5 handlers)
+[GIN-debug] POST   /api/v1/announcements     --> backend/internal/api.(*AnnouncementHandler).CreateAnnouncement-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/announcements/:id --> backend/internal/api.(*AnnouncementHandler).DeleteAnnouncement-fm (5 handlers)
+[GIN-debug] POST   /api/v1/announcements/:id/read --> backend/internal/api.(*AnnouncementHandler).MarkAsRead-fm (5 handlers)
+[GIN-debug] GET    /api/v1/announcements/unread-count --> backend/internal/api.(*AnnouncementHandler).GetUnreadCount-fm (5 handlers)
+[GIN-debug] GET    /api/v1/calendar/events   --> backend/internal/api.(*CalendarHandler).GetEvents-fm (5 handlers)
+[GIN-debug] GET    /api/v1/calendar/employees --> backend/internal/api.(*CalendarHandler).GetEmployees-fm (5 handlers)
+[GIN-debug] GET    /api/v1/shifts            --> backend/internal/api.(*ShiftHandler).ListShifts-fm (6 handlers)
+[GIN-debug] GET    /api/v1/shifts/active     --> backend/internal/api.(*ShiftHandler).ListActiveShifts-fm (6 handlers)
+[GIN-debug] GET    /api/v1/shifts/:id        --> backend/internal/api.(*ShiftHandler).GetShift-fm (6 handlers)
+[GIN-debug] POST   /api/v1/shifts            --> backend/internal/api.(*ShiftHandler).CreateShift-fm (7 handlers)
+[GIN-debug] PUT    /api/v1/shifts/:id        --> backend/internal/api.(*ShiftHandler).UpdateShift-fm (7 handlers)
+[GIN-debug] DELETE /api/v1/shifts/:id        --> backend/internal/api.(*ShiftHandler).DeleteShift-fm (7 handlers)
+[GIN-debug] PATCH  /api/v1/shifts/:id/toggle --> backend/internal/api.(*ShiftHandler).ToggleShiftActive-fm (7 handlers)
+[GIN-debug] GET    /api/v1/messages          --> backend/internal/api.(*MessageHandler).GetInbox-fm (5 handlers)
+[GIN-debug] GET    /api/v1/messages/sent     --> backend/internal/api.(*MessageHandler).GetSentMessages-fm (5 handlers)
+[GIN-debug] GET    /api/v1/messages/unread-count --> backend/internal/api.(*MessageHandler).GetUnreadCount-fm (5 handlers)
+[GIN-debug] GET    /api/v1/messages/recipients --> backend/internal/api.(*MessageHandler).GetRecipientSuggestions-fm (5 handlers)
+[GIN-debug] GET    /api/v1/messages/:id      --> backend/internal/api.(*MessageHandler).GetMessage-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages          --> backend/internal/api.(*MessageHandler).SendMessage-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages/announcement-question --> backend/internal/api.(*MessageHandler).AskAnnouncementQuestion-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages/:id/read --> backend/internal/api.(*MessageHandler).MarkAsRead-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages/:id/unread --> backend/internal/api.(*MessageHandler).MarkAsUnread-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages/:id/archive --> backend/internal/api.(*MessageHandler).ArchiveMessage-fm (5 handlers)
+[GIN-debug] POST   /api/v1/messages/:id/reply --> backend/internal/api.(*MessageHandler).ReplyToMessage-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/messages/:id      --> backend/internal/api.(*MessageHandler).DeleteMessage-fm (5 handlers)
+[GIN-debug] GET    /api/v1/audit/logs        --> backend/internal/api.(*AuditHandler).GetAuditLogs-fm (7 handlers)
+[GIN-debug] GET    /api/v1/audit/login-attempts --> backend/internal/api.(*AuditHandler).GetLoginAttempts-fm (7 handlers)
+[GIN-debug] GET    /api/v1/audit/stats       --> backend/internal/api.(*AuditHandler).GetGlobalStats-fm (7 handlers)
+[GIN-debug] GET    /api/v1/audit/login-history --> backend/internal/api.(*AuditHandler).GetLoginHistory-fm (6 handlers)
+[GIN-debug] GET    /api/v1/audit/active-sessions --> backend/internal/api.(*AuditHandler).GetActiveSessions-fm (6 handlers)
+[GIN-debug] GET    /api/v1/audit/page-visits --> backend/internal/api.(*AuditHandler).GetPageVisits-fm (6 handlers)
+[GIN-debug] GET    /api/v1/audit/user/:user_id/stats --> backend/internal/api.(*AuditHandler).GetUserStats-fm (6 handlers)
+[GIN-debug] GET    /api/v1/permissions       --> backend/internal/api.(*PermissionHandler).ListPermissions-fm (5 handlers)
+[GIN-debug] GET    /api/v1/permissions/role/:role --> backend/internal/api.(*PermissionHandler).GetPermissionsByRole-fm (5 handlers)
+[GIN-debug] GET    /api/v1/permissions/roles --> backend/internal/api.(*PermissionHandler).ListRoles-fm (5 handlers)
+[GIN-debug] GET    /api/v1/permissions/resources --> backend/internal/api.(*PermissionHandler).ListResources-fm (5 handlers)
+[GIN-debug] GET    /api/v1/permissions/:id   --> backend/internal/api.(*PermissionHandler).GetPermission-fm (5 handlers)
+[GIN-debug] POST   /api/v1/permissions       --> backend/internal/api.(*PermissionHandler).CreatePermission-fm (5 handlers)
+[GIN-debug] PUT    /api/v1/permissions/:id   --> backend/internal/api.(*PermissionHandler).UpdatePermission-fm (5 handlers)
+[GIN-debug] DELETE /api/v1/permissions/:id   --> backend/internal/api.(*PermissionHandler).DeletePermission-fm (5 handlers)
+[GIN-debug] GET    /api/v1/users             --> backend/internal/api.(*UserHandler).ListUsers-fm (7 handlers)
+[GIN-debug] POST   /api/v1/users             --> backend/internal/api.(*UserHandler).CreateUser-fm (7 handlers)
+[GIN-debug] PUT    /api/v1/users/:id         --> backend/internal/api.(*UserHandler).UpdateUser-fm (7 handlers)
+[GIN-debug] DELETE /api/v1/users/:id         --> backend/internal/api.(*UserHandler).DeleteUser-fm (7 handlers)
+[GIN-debug] PATCH  /api/v1/users/:id/toggle-active --> backend/internal/api.(*UserHandler).ToggleUserActive-fm (7 handlers)
+{"level":"info","msg":"Starting server on port 8080 in development mode","time":"2025-12-18T09:13:13-06:00"}
+{"errors":"","ip":"::1","latency":33387,"level":"info","method":"GET","msg":"","status":200,"time":"2025-12-18T09:13:14-06:00","uri":"/api/v1/health","user_agent":"curl/8.11.1"}

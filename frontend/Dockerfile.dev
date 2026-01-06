@@ -1,0 +1,23 @@
+# Development Dockerfile for hot reloading
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Build argument for API URL
+ARG NEXT_PUBLIC_API_URL=/api/v1
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+# Copy package files
+COPY package.json package-lock.json* ./
+
+# Install dependencies
+RUN npm install
+
+# Expose port
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Start in dev mode
+CMD ["npm", "run", "dev"]

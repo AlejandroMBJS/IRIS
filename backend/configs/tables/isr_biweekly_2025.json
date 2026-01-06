@@ -1,0 +1,73 @@
+{
+  "periodicity": "biweekly",
+  "year": 2025,
+  "description": "Biweekly Income Tax Withholding Table 2025 - Salaried Employees",
+  "rows": [
+    {
+      "lower_limit": 0.01,
+      "upper_limit": 435.39,
+      "fixed_fee": 0.00,
+      "percentage": 1.92
+    },
+    {
+      "lower_limit": 435.40,
+      "upper_limit": 3694.52,
+      "fixed_fee": 8.36,
+      "percentage": 6.40
+    },
+    {
+      "lower_limit": 3694.53,
+      "upper_limit": 6576.26,
+      "fixed_fee": 216.88,
+      "percentage": 10.88
+    },
+    {
+      "lower_limit": 6576.27,
+      "upper_limit": 7707.69,
+      "fixed_fee": 535.65,
+      "percentage": 16.00
+    },
+    {
+      "lower_limit": 7707.70,
+      "upper_limit": 23076.92,
+      "fixed_fee": 716.61,
+      "percentage": 17.92
+    },
+    {
+      "lower_limit": 23076.93,
+      "upper_limit": 46153.85,
+      "fixed_fee": 3452.27,
+      "percentage": 21.36
+    },
+    {
+      "lower_limit": 46153.86,
+      "upper_limit": 138461.54,
+      "fixed_fee": 8378.50,
+      "percentage": 23.52
+    },
+    {
+      "lower_limit": 138461.55,
+      "upper_limit": 184615.38,
+      "fixed_fee": 30087.05,
+      "percentage": 30.00
+    },
+    {
+      "lower_limit": 184615.39,
+      "upper_limit": 553846.15,
+      "fixed_fee": 43933.21,
+      "percentage": 32.00
+    },
+    {
+      "lower_limit": 553846.16,
+      "upper_limit": 1661538.46,
+      "fixed_fee": 162086.90,
+      "percentage": 34.00
+    },
+    {
+      "lower_limit": 1661538.47,
+      "upper_limit": 999999999.99,
+      "fixed_fee": 538703.04,
+      "percentage": 35.00
+    }
+  ]
+}

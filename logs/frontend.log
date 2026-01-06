@@ -1,0 +1,11 @@
+
+> iris-payroll-frontend@0.1.0 dev /home/amb/iris-talent/frontend
+> next dev
+
+   ▲ Next.js 16.0.7 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.36.81:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 433ms

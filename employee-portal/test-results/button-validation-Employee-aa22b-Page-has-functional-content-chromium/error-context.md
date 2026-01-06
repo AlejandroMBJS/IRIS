@@ -1,0 +1,55 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e6]:
+        - heading "IRIS" [level=1] [ref=e7]
+        - generic [ref=e8]: Portal
+      - generic [ref=e9]: Iniciar Sesión
+      - generic [ref=e10]: Ingresa tus credenciales para acceder al Portal del Empleado
+    - generic [ref=e12]:
+      - generic [ref=e13]:
+        - generic [ref=e14]: Correo Electrónico
+        - generic [ref=e15]:
+          - img [ref=e16]
+          - textbox "Correo Electrónico" [ref=e19]:
+            - /placeholder: admin@empresa.com
+            - text: e2e.employee@test.com
+      - generic [ref=e20]:
+        - generic [ref=e21]: Contraseña
+        - generic [ref=e22]:
+          - img [ref=e23]
+          - textbox "Contraseña" [ref=e26]:
+            - /placeholder: ••••••••
+            - text: Test123456!
+          - button [ref=e27]:
+            - img [ref=e28]
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - checkbox "Recordarme" [ref=e33]
+          - generic [ref=e34]: Recordarme
+        - link "¿Olvidaste tu contraseña?" [ref=e35] [cursor=pointer]:
+          - /url: /auth/forgot-password
+      - button "Iniciar Sesión" [ref=e36]
+      - generic [ref=e37]:
+        - text: ¿No tienes una cuenta?
+        - link "Contacta al administrador" [ref=e38] [cursor=pointer]:
+          - /url: /auth/register
+  - region "Notifications alt+T"
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=e43] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e44]:
+      - img [ref=e45]
+    - generic [ref=e48]:
+      - button "Open issues overlay" [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: "0"
+          - generic [ref=e52]: "1"
+        - generic [ref=e53]: Issue
+      - button "Collapse issues badge" [ref=e54]:
+        - img [ref=e55]
+  - alert [ref=e57]
+```

@@ -1,0 +1,184 @@
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: iris-payroll-backend
+    labels:
+      - "com.iris.service=Backend API"
+      - "com.iris.description=API REST del sistema de nóminas"
+      - "com.iris.port=8080"
+    environment:
+      - GIN_MODE=release
+      - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET:-your-super-secret-refresh-key-change-in-production}
+      - DATABASE_URL=/data/iris_payroll.db
+      - UPLOAD_PATH=/data/uploads
+      - PDF_OUTPUT_PATH=/data/pdfs
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost,http://localhost:80}
+    volumes:
+      - iris-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "-O", "/dev/null", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - iris-network
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=/api/v1
+    container_name: iris-payroll-frontend
+    labels:
+      - "com.iris.service=Frontend Admin"
+      - "com.iris.description=Panel de administración (Next.js)"
+      - "com.iris.port=3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=/api/v1
+      - NODE_ENV=production
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Employee Portal Service
+  employee-portal:
+    build:
+      context: ./employee-portal
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=/api/v1
+    container_name: iris-employee-portal
+    labels:
+      - "com.iris.service=Portal Empleados"
+      - "com.iris.description=Portal de autoservicio para empleados"
+      - "com.iris.port=3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=/api/v1
+      - NODE_ENV=production
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: iris-payroll-nginx
+    labels:
+      - "com.iris.service=Nginx Proxy"
+      - "com.iris.description=Proxy reverso y balanceador"
+      - "com.iris.port=80,8081"
+    ports:
+      - "80:80"
+      - "8081:8081"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro,z
+    depends_on:
+      - backend
+      - frontend
+      - employee-portal
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Docker Stats Exporter
+  docker-exporter:
+    build: ./monitoring/docker-stats-exporter
+    container_name: iris-docker-exporter
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Prometheus - Recolector de metricas
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: iris-prometheus
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro,z
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=7d'
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Grafana - Dashboard visual
+  grafana:
+    image: grafana/grafana:latest
+    container_name: iris-grafana
+    ports:
+      - "8082:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=iris2026
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro,z
+    depends_on:
+      - prometheus
+      - loki
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Loki - Agregador de logs
+  loki:
+    image: grafana/loki:2.9.0
+    container_name: iris-loki
+    volumes:
+      - ./monitoring/loki/loki-config.yml:/etc/loki/local-config.yaml:ro,z
+      - loki-data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+  # Promtail - Recolector de logs
+  promtail:
+    image: grafana/promtail:2.9.0
+    container_name: iris-promtail
+    privileged: true
+    user: root
+    volumes:
+      - ./monitoring/loki/promtail-config.yml:/etc/promtail/config.yml:ro,z
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki
+    restart: unless-stopped
+    networks:
+      - iris-network
+
+volumes:
+  iris-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  loki-data:
+    driver: local
+
+networks:
+  iris-network:
+    driver: bridge

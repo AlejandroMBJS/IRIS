@@ -1,0 +1,43 @@
+1. Abrir los puertos en el firewall                                                         
+                                                                                              
+  Ejecuta estos comandos:                                                                     
+                                                                                              
+  # Abrir los puertos                                                                         
+  sudo firewall-cmd --permanent --add-port=80/tcp                                             
+  sudo firewall-cmd --permanent --add-port=8081/tcp                                           
+  sudo firewall-cmd --permanent --add-port=8082/tcp                                           
+                                                                                              
+  # Aplicar los cambios                                                                       
+  sudo firewall-cmd --reload                                                                  
+                                                                                              
+  # Verificar que se abrieron                                                                 
+  sudo firewall-cmd --list-ports                                                              
+                                                                                              
+  2. (Opcional) Configurar IP estática para Ethernet                                          
+                                                                                              
+  Si quieres una IP fija cuando conectes el cable, crea una conexión:                         
+                                                                                              
+  # Crear conexión con IP estática (ajusta la IP según tu red)                                
+  sudo nmcli connection add type ethernet con-name "Red-Cableada" ifname enp0s31f6 \          
+    ipv4.addresses "192.168.101.200/24" \                                                     
+    ipv4.gateway "192.168.101.1" \                                                            
+    ipv4.dns "8.8.8.8,8.8.4.4" \                                                              
+    ipv4.method manual                                                                        
+                                                                                              
+  # Activarla cuando conectes el cable                                                        
+  sudo nmcli connection up "Red-Cableada"                                                     
+                                                                                              
+  3. Verificar acceso                                                                         
+                                                                                              
+  Una vez conectado el cable y con los puertos abiertos:                                      
+                                                                                              
+  # Ver tu IP                                                                                 
+  ip addr show enp0s31f6                                                                      
+                                                                                              
+  # Probar que los puertos responden                                                          
+  curl http://localhost:80                                                                    
+  curl http://localhost:8081                                                                  
+  curl http://localhost:8082                                                                  
+                                                                                              
+  Desde otro equipo en la misma red podrán acceder usando: http://TU_IP:80, http://TU_IP:8081, etc.
+                                                                

@@ -1,0 +1,63 @@
+{
+  "uma": {
+    "daily_value": 113.14,
+    "year": 2025,
+    "effective_date": "2025-01-01",
+    "description": "Unidad de Medida y Actualización (Measurement and Update Unit)"
+  },
+  
+  "minimum_wages": {
+    "general": {
+      "daily_value": 278.80,
+      "year": 2025,
+      "effective_date": "2025-01-01",
+      "zone": "Rest of the Country",
+      "comment": "Applies to San Luis Potosí"
+    },
+    "northern_border_free_zone": {
+      "daily_value": 419.88,
+      "year": 2025,
+      "effective_date": "2025-01-01",
+      "zone": "Northern Border Free Zone"
+    },
+    "historical": {
+      "zone_b": {
+        "daily_value": 185.46,
+        "year": 2024,
+        "active": false,
+        "comment": "Only for compatibility with old contracts"
+      },
+      "zone_c": {
+        "daily_value": 180.00,
+        "year": 2024,
+        "active": false,
+        "comment": "Only for compatibility with old contracts"
+      }
+    },
+    "default_zone": "general"
+  },
+  
+  "limits": {
+    "imss_cap": {
+      "multiplier": 25.0,
+      "description": "25 times UMA value for IMSS calculation"
+    },
+    "contribution_base": {
+      "multiplier": 3.0,
+      "description": "3 times minimum wage for daily contribution base"
+    },
+    "minimum_contribution_salary": {
+      "multiplier": 1.0,
+      "description": "1 UMA for minimum salary for contributions"
+    }
+  },
+  
+  "udis": {
+    "value": 7.88,
+    "year": 2024,
+    "effective_date": "2024-01-01",
+    "description": "Investment Units (Unidades de Inversión)"
+  },
+  
+  "fiscal_year": 2025
+}

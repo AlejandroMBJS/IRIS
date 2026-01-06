@@ -1,0 +1,156 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 50}, {"color": "red", "value": 80}]},
+          "unit": "percent", "min": 0, "max": 100
+        }
+      },
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-backend\"}", "legendFormat": "Backend", "refId": "A"}],
+      "title": "Backend API - CPU %",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 50}, {"color": "red", "value": 80}]},
+          "unit": "percent", "min": 0, "max": 100
+        }
+      },
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 0},
+      "id": 2,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-frontend\"}", "legendFormat": "Frontend", "refId": "A"}],
+      "title": "Frontend Admin - CPU %",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 50}, {"color": "red", "value": 80}]},
+          "unit": "percent", "min": 0, "max": 100
+        }
+      },
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 0},
+      "id": 3,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-employee-portal\"}", "legendFormat": "Portal", "refId": "A"}],
+      "title": "Portal Empleados - CPU %",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "yellow", "value": 50}, {"color": "red", "value": 80}]},
+          "unit": "percent", "min": 0, "max": 100
+        }
+      },
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 0},
+      "id": 4,
+      "options": {"orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "showThresholdLabels": false, "showThresholdMarkers": true},
+      "targets": [{"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-nginx\"}", "legendFormat": "Nginx", "refId": "A"}],
+      "title": "Nginx Proxy - CPU %",
+      "type": "gauge"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {"axisCenteredZero": false, "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 20, "gradientMode": "none", "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 5, "showPoints": "never", "spanNulls": false, "stacking": {"group": "A", "mode": "none"}},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "unit": "bytes"
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6},
+      "id": 5,
+      "options": {"legend": {"calcs": ["last"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [
+        {"datasource": "Prometheus", "expr": "docker_container_memory_bytes{name=\"iris-payroll-backend\"}", "legendFormat": "Backend API", "refId": "A"},
+        {"datasource": "Prometheus", "expr": "docker_container_memory_bytes{name=\"iris-payroll-frontend\"}", "legendFormat": "Frontend Admin", "refId": "B"},
+        {"datasource": "Prometheus", "expr": "docker_container_memory_bytes{name=\"iris-employee-portal\"}", "legendFormat": "Portal Empleados", "refId": "C"},
+        {"datasource": "Prometheus", "expr": "docker_container_memory_bytes{name=\"iris-payroll-nginx\"}", "legendFormat": "Nginx Proxy", "refId": "D"}
+      ],
+      "title": "Uso de Memoria",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {"axisCenteredZero": false, "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 20, "gradientMode": "none", "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 5, "showPoints": "never", "spanNulls": false, "stacking": {"group": "A", "mode": "none"}},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "unit": "percent", "min": 0, "max": 100
+        }
+      },
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6},
+      "id": 6,
+      "options": {"legend": {"calcs": ["last"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [
+        {"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-backend\"}", "legendFormat": "Backend API", "refId": "A"},
+        {"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-frontend\"}", "legendFormat": "Frontend Admin", "refId": "B"},
+        {"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-employee-portal\"}", "legendFormat": "Portal Empleados", "refId": "C"},
+        {"datasource": "Prometheus", "expr": "docker_container_cpu_percent{name=\"iris-payroll-nginx\"}", "legendFormat": "Nginx Proxy", "refId": "D"}
+      ],
+      "title": "Uso de CPU %",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "palette-classic"},
+          "custom": {"axisCenteredZero": false, "axisLabel": "", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 20, "gradientMode": "none", "lineInterpolation": "smooth", "lineWidth": 2, "pointSize": 5, "showPoints": "never", "spanNulls": false, "stacking": {"group": "A", "mode": "none"}},
+          "mappings": [],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]},
+          "unit": "bytes"
+        }
+      },
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 14},
+      "id": 7,
+      "options": {"legend": {"calcs": ["last"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [
+        {"datasource": "Prometheus", "expr": "docker_container_network_rx_bytes{name=\"iris-payroll-nginx\"}", "legendFormat": "Nginx - Recibido", "refId": "A"},
+        {"datasource": "Prometheus", "expr": "docker_container_network_tx_bytes{name=\"iris-payroll-nginx\"}", "legendFormat": "Nginx - Enviado", "refId": "B"}
+      ],
+      "title": "Trafico de Red (Nginx)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["docker", "iris", "containers"],
+  "templating": {"list": []},
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {},
+  "timezone": "",
+  "title": "IRIS Payroll - Contenedores",
+  "uid": "iris-containers",
+  "version": 2
+}

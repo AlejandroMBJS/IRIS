@@ -1,0 +1,175 @@
+{
+  "year": 2025,
+  "description": "Employment Subsidy Tables 2025 - Based on monthly, biweekly, and weekly periods",
+  "monthly": [
+    {
+      "lower_limit": 0.01,
+      "upper_limit": 1768.96,
+      "subsidy_amount": 407.02
+    },
+    {
+      "lower_limit": 1768.97,
+      "upper_limit": 2653.38,
+      "subsidy_amount": 406.83
+    },
+    {
+      "lower_limit": 2653.39,
+      "upper_limit": 3472.84,
+      "subsidy_amount": 406.62
+    },
+    {
+      "lower_limit": 3472.85,
+      "upper_limit": 3537.87,
+      "subsidy_amount": 392.77
+    },
+    {
+      "lower_limit": 3537.88,
+      "upper_limit": 4446.15,
+      "subsidy_amount": 382.46
+    },
+    {
+      "lower_limit": 4446.16,
+      "upper_limit": 4717.18,
+      "subsidy_amount": 354.23
+    },
+    {
+      "lower_limit": 4717.19,
+      "upper_limit": 5335.42,
+      "subsidy_amount": 324.87
+    },
+    {
+      "lower_limit": 5335.43,
+      "upper_limit": 6224.67,
+      "subsidy_amount": 294.63
+    },
+    {
+      "lower_limit": 6224.68,
+      "upper_limit": 7113.90,
+      "subsidy_amount": 253.54
+    },
+    {
+      "lower_limit": 7113.91,
+      "upper_limit": 7382.33,
+      "subsidy_amount": 217.61
+    },
+    {
+      "lower_limit": 7382.34,
+      "upper_limit": 999999999.99,
+      "subsidy_amount": 0.00
+    }
+  ],
+  "biweekly": [
+    {
+      "lower_limit": 0.01,
+      "upper_limit": 815.49,
+      "subsidy_amount": 187.85
+    },
+    {
+      "lower_limit": 815.50,
+      "upper_limit": 1223.86,
+      "subsidy_amount": 187.76
+    },
+    {
+      "lower_limit": 1223.87,
+      "upper_limit": 1601.16,
+      "subsidy_amount": 187.67
+    },
+    {
+      "lower_limit": 1601.17,
+      "upper_limit": 1631.17,
+      "subsidy_amount": 181.26
+    },
+    {
+      "lower_limit": 1631.18,
+      "upper_limit": 2050.61,
+      "subsidy_amount": 176.52
+    },
+    {
+      "lower_limit": 2050.62,
+      "upper_limit": 2176.62,
+      "subsidy_amount": 163.49
+    },
+    {
+      "lower_limit": 2176.63,
+      "upper_limit": 2461.73,
+      "subsidy_amount": 149.94
+    },
+    {
+      "lower_limit": 2461.74,
+      "upper_limit": 2872.92,
+      "subsidy_amount": 135.98
+    },
+    {
+      "lower_limit": 2872.93,
+      "upper_limit": 3283.11,
+      "subsidy_amount": 117.02
+    },
+    {
+      "lower_limit": 3283.12,
+      "upper_limit": 3406.84,
+      "subsidy_amount": 100.43
+    },
+    {
+      "lower_limit": 3406.85,
+      "upper_limit": 999999999.99,
+      "subsidy_amount": 0.00
+    }
+  ],
+  "weekly": [
+    {
+      "lower_limit": 0.01,
+      "upper_limit": 407.33,
+      "subsidy_amount": 93.73
+    },
+    {
+      "lower_limit": 407.34,
+      "upper_limit": 610.96,
+      "subsidy_amount": 93.66
+    },
+    {
+      "lower_limit": 610.97,
+      "upper_limit": 799.68,
+      "subsidy_amount": 93.60
+    },
+    {
+      "lower_limit": 799.69,
+      "upper_limit": 814.66,
+      "subsidy_amount": 90.44
+    },
+    {
+      "lower_limit": 814.67,
+      "upper_limit": 1023.75,
+      "subsidy_amount": 88.06
+    },
+    {
+      "lower_limit": 1023.76,
+      "upper_limit": 1086.19,
+      "subsidy_amount": 81.55
+    },
+    {
+      "lower_limit": 1086.20,
+      "upper_limit": 1228.57,
+      "subsidy_amount": 74.83
+    },
+    {
+      "lower_limit": 1228.58,
+      "upper_limit": 1433.32,
+      "subsidy_amount": 67.83
+    },
+    {
+      "lower_limit": 1433.33,
+      "upper_limit": 1638.07,
+      "subsidy_amount": 58.38
+    },
+    {
+      "lower_limit": 1638.08,
+      "upper_limit": 1699.88,
+      "subsidy_amount": 50.12
+    },
+    {
+      "lower_limit": 1699.89,
+      "upper_limit": 999999999.99,
+      "subsidy_amount": 0.00
+    }
+  ]
+}

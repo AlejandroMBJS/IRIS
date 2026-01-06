@@ -1,0 +1,133 @@
+{
+  "year": 2025,
+  "description": "Integration Factor Table for SDI (Salario Diario Integrado) calculation based on years of service",
+  "notes": "Factor includes vacation premium (25%) and aguinaldo (15 days minimum)",
+  "base_formula": "1 + (vacation_days * 0.25 + 15) / 365",
+  "factors": [
+    {
+      "years_of_service": 1,
+      "vacation_days": 12,
+      "factor": 1.0493
+    },
+    {
+      "years_of_service": 2,
+      "vacation_days": 14,
+      "factor": 1.0507
+    },
+    {
+      "years_of_service": 3,
+      "vacation_days": 16,
+      "factor": 1.0521
+    },
+    {
+      "years_of_service": 4,
+      "vacation_days": 18,
+      "factor": 1.0534
+    },
+    {
+      "years_of_service": 5,
+      "vacation_days": 20,
+      "factor": 1.0548
+    },
+    {
+      "years_of_service": 6,
+      "vacation_days": 22,
+      "factor": 1.0562
+    },
+    {
+      "years_of_service": 7,
+      "vacation_days": 22,
+      "factor": 1.0562
+    },
+    {
+      "years_of_service": 8,
+      "vacation_days": 22,
+      "factor": 1.0562
+    },
+    {
+      "years_of_service": 9,
+      "vacation_days": 22,
+      "factor": 1.0562
+    },
+    {
+      "years_of_service": 10,
+      "vacation_days": 22,
+      "factor": 1.0562
+    },
+    {
+      "years_of_service": 11,
+      "vacation_days": 24,
+      "factor": 1.0575
+    },
+    {
+      "years_of_service": 12,
+      "vacation_days": 24,
+      "factor": 1.0575
+    },
+    {
+      "years_of_service": 13,
+      "vacation_days": 24,
+      "factor": 1.0575
+    },
+    {
+      "years_of_service": 14,
+      "vacation_days": 24,
+      "factor": 1.0575
+    },
+    {
+      "years_of_service": 15,
+      "vacation_days": 24,
+      "factor": 1.0575
+    },
+    {
+      "years_of_service": 16,
+      "vacation_days": 26,
+      "factor": 1.0589
+    },
+    {
+      "years_of_service": 17,
+      "vacation_days": 26,
+      "factor": 1.0589
+    },
+    {
+      "years_of_service": 18,
+      "vacation_days": 26,
+      "factor": 1.0589
+    },
+    {
+      "years_of_service": 19,
+      "vacation_days": 26,
+      "factor": 1.0589
+    },
+    {
+      "years_of_service": 20,
+      "vacation_days": 26,
+      "factor": 1.0589
+    },
+    {
+      "years_of_service": 21,
+      "vacation_days": 28,
+      "factor": 1.0603
+    },
+    {
+      "years_of_service": 25,
+      "vacation_days": 30,
+      "factor": 1.0616
+    },
+    {
+      "years_of_service": 30,
+      "vacation_days": 32,
+      "factor": 1.0630
+    },
+    {
+      "years_of_service": 35,
+      "vacation_days": 32,
+      "factor": 1.0630
+    }
+  ],
+  "uma_2025": {
+    "daily": 113.14,
+    "monthly": 3442.36,
+    "annual": 41308.28
+  }
+}

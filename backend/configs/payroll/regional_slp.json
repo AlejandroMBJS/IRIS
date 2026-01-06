@@ -1,0 +1,39 @@
+{
+  "state": {
+    "name": "San Luis Potosí",
+    "code": "SLP",
+    "salary_zone": "general"
+  },
+  
+  "state_payroll_tax": {
+    "enabled": true,
+    "rate": 0.025,
+    "name": "Tax on Remuneration for Personal Work (Impuesto sobre Erogaciones)",
+    "law_reference": "San Luis Potosí State Treasury Law",
+    "calculation_base": ["base_salary", "overtime", "bonuses", "christmas_bonus", "vacation_pay"],
+    "exemptions": [],
+    "payment_deadline_day": 17,
+    "payment_deadline_month": "following_month"
+  },
+  
+  "state_holidays": [
+    {
+      "date": "2025-05-15",
+      "name": "San Luis Potosí Foundation Day",
+      "type": "state",
+      "paid": true
+    },
+    {
+      "date": "2025-08-25",
+      "name": "San Luis Potosí State Holiday",
+      "type": "state",
+      "paid": true
+    }
+  ],
+  
+  "specific_regulations": {
+    "vacation_bonus_calculation": "proportional",
+    "christmas_bonus_payment": "before_december_20",
+    "overtime_cap_hours_per_day": 3
+  }
+}

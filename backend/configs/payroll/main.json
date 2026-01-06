@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "name": "IRIS Payroll Configuration - San Luis Potosí 2025",
+  "description": "Complete payroll configuration for Mexican payroll with San Luis Potosí specific settings",
+  "last_updated": "2025-01-15T10:30:00Z",
+  
+  "config_files": {
+    "official_values": "payroll/official_values.json",
+    "regional": "payroll/regional_slp.json",
+    "contribution_rates": "payroll/contribution_rates.json",
+    "labor_concepts": "payroll/labor_concepts.json",
+    "calculation_tables": "payroll/calculation_tables.json"
+  },
+  
+  "tables": {
+    "isr": {
+      "monthly": "tables/isr_monthly_2025.json",
+      "biweekly": "tables/isr_biweekly_2025.json"
+    },
+    "subsidy": "tables/subsidy_2025.json",
+    "vacations": "tables/vacations_2025.json",
+    "integration_factor": "tables/factor_integration.json"
+  },
+  
+  "holidays": {
+    "slp": "holidays/slp_2025.json"
+  },
+  
+  "settings": {
+    "default_salary_zone": "general",
+    "default_pay_period": "biweekly",
+    "currency": "MXN",
+    "decimal_places": 2,
+    "rounding_method": "half_up",
+    "calculation_precision": 4
+  }
+}
