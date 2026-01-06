@@ -9,6 +9,8 @@ services:
       - "com.iris.service=Backend API"
       - "com.iris.description=API REST del sistema de nóminas"
       - "com.iris.port=8080"
+    ports:
+      - "8080:8080"
     environment:
       - GIN_MODE=release
       - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key-change-in-production}
@@ -80,10 +82,10 @@ services:
     labels:
       - "com.iris.service=Nginx Proxy"
       - "com.iris.description=Proxy reverso y balanceador"
-      - "com.iris.port=8080,8081"
+      - "com.iris.port=80,8081"
     ports:
-      - "9090:80"
-      - "9091:8081"
+      - "8000:80"
+      - "8081:8081"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro,z
     depends_on:
@@ -125,7 +127,7 @@ services:
     image: docker.io/grafana/grafana:latest
     container_name: iris-grafana
     ports:
-      - "9092:3000"
+      - "8082:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=iris2026
