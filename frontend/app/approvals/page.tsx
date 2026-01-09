@@ -261,7 +261,7 @@ export default function ApprovalsPage() {
       </div>
 
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as ApprovalStage)}>
-        <TabsList className="grid w-full grid-cols-4 bg-slate-800">
+        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-slate-800 gap-1">
           {canViewTab('SUPERVISOR') && (
             <TabsTrigger value="SUPERVISOR" className="relative">
               Supervisor
@@ -327,16 +327,17 @@ export default function ApprovalsPage() {
                       <p className="text-slate-400">No pending requests at this stage</p>
                     </div>
                   ) : (
+                    <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow className="border-slate-700">
                           <TableHead className="text-slate-300">Employee</TableHead>
                           <TableHead className="text-slate-300">Type</TableHead>
-                          <TableHead className="text-slate-300">Period</TableHead>
-                          <TableHead className="text-slate-300">Days</TableHead>
-                          <TableHead className="text-slate-300">Reason</TableHead>
-                          <TableHead className="text-slate-300">Collar Type</TableHead>
-                          <TableHead className="text-slate-300">Submitted</TableHead>
+                          <TableHead className="text-slate-300 hidden md:table-cell">Period</TableHead>
+                          <TableHead className="text-slate-300 hidden lg:table-cell">Days</TableHead>
+                          <TableHead className="text-slate-300 hidden lg:table-cell">Reason</TableHead>
+                          <TableHead className="text-slate-300 hidden md:table-cell">Collar Type</TableHead>
+                          <TableHead className="text-slate-300 hidden xl:table-cell">Submitted</TableHead>
                           <TableHead className="text-slate-300 text-right">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
@@ -361,7 +362,7 @@ export default function ApprovalsPage() {
                                 {getRequestTypeLabel(request.request_type)}
                               </Badge>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden md:table-cell">
                               <div className="flex items-center gap-1 text-slate-300">
                                 <Calendar className="h-3 w-3" />
                                 <span className="text-sm">
@@ -371,13 +372,13 @@ export default function ApprovalsPage() {
                                 </span>
                               </div>
                             </TableCell>
-                            <TableCell className="text-slate-300">{request.total_days}</TableCell>
-                            <TableCell className="max-w-xs">
+                            <TableCell className="text-slate-300 hidden lg:table-cell">{request.total_days}</TableCell>
+                            <TableCell className="max-w-xs hidden lg:table-cell">
                               <p className="text-sm text-slate-300 truncate" title={request.reason}>
                                 {request.reason}
                               </p>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden md:table-cell">
                               <Badge
                                 variant="secondary"
                                 className={
@@ -391,24 +392,26 @@ export default function ApprovalsPage() {
                                 {request.employee?.collar_type?.replace('_', ' ') || 'N/A'}
                               </Badge>
                             </TableCell>
-                            <TableCell className="text-slate-400 text-sm">
+                            <TableCell className="text-slate-400 text-sm hidden xl:table-cell">
                               {formatDate(request.created_at)}
                             </TableCell>
                             <TableCell className="text-right">
-                              <div className="flex gap-2 justify-end items-center">
+                              <div className="flex flex-col sm:flex-row gap-2 justify-end items-center">
                                 <HoldToConfirmButton
                                   variant="approve"
                                   onConfirm={() => handleDirectApprove(request)}
                                   holdDuration={1000}
+                                  className="text-xs sm:text-sm"
                                 >
-                                  Hold to Approve
+                                  <span className="hidden sm:inline">Hold to </span>Approve
                                 </HoldToConfirmButton>
                                 <HoldToConfirmButton
                                   variant="decline"
                                   onConfirm={() => handleDeclineClick(request)}
                                   holdDuration={1000}
+                                  className="text-xs sm:text-sm"
                                 >
-                                  Hold to Decline
+                                  <span className="hidden sm:inline">Hold to </span>Decline
                                 </HoldToConfirmButton>
                               </div>
                             </TableCell>
@@ -416,6 +419,7 @@ export default function ApprovalsPage() {
                         ))}
                       </TableBody>
                     </Table>
+                    </div>
                   )}
                 </CardContent>
               </Card>

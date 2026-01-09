@@ -329,7 +329,7 @@ export default function IncidencesPage() {
     <DashboardLayout>
       <div className="space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold text-white flex items-center gap-2">
               <ClipboardList className="h-6 w-6" />
@@ -339,38 +339,38 @@ export default function IncidencesPage() {
               Manage absences, vacations, overtime and more
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button
               onClick={exportToExcel}
               variant="outline"
               className="border-emerald-600 text-emerald-400 hover:bg-emerald-600/20"
               title="Export approved incidences to Excel"
             >
-              <FileDown className="h-4 w-4 mr-2" />
-              Export
+              <FileDown className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Export</span>
             </Button>
             <Button
               onClick={() => handleOpenCreateDialog("single")}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              <UserPlus className="h-4 w-4 mr-2" />
-              One Employee
+              <UserPlus className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">One Employee</span>
             </Button>
             <Button
               onClick={() => handleOpenCreateDialog("multiple")}
               variant="outline"
               className="border-blue-600 text-blue-400 hover:bg-blue-600/20"
             >
-              <Users className="h-4 w-4 mr-2" />
-              Multiple Employees
+              <Users className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Multiple</span>
             </Button>
             <Button
               onClick={() => handleOpenCreateDialog("all")}
               variant="outline"
               className="border-green-600 text-green-400 hover:bg-green-600/20"
             >
-              <Users className="h-4 w-4 mr-2" />
-              All
+              <Users className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">All</span>
             </Button>
           </div>
         </div>
